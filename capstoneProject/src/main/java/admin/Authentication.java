@@ -1,3 +1,9 @@
+package admin;
+
+/**
+ * **********************NOT IN USE FOR THE CONSOLE APPLICATION**************************
+ */
+
 /**
  * This is just some starter/brainstorming type stuff, feel free to change anything as needed
  */
