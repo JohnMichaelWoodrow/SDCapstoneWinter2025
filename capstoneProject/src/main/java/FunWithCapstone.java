@@ -13,6 +13,8 @@ import java.util.*;
 
 // TODO: Verify if user input is needed and flesh out how the application should display the information. Verify that objects are being created/used correctly.
 
+// TODO: Change how expiry date is used. Right now its just today's date object that is passed in. How should it be calculated?
+
 public class FunWithCapstone {
     public static void main(String[] args) {
         // Create Quotes
@@ -49,6 +51,7 @@ public class FunWithCapstone {
         agent.viewCustomerInfo(customer);
 
         // Expire Quotes
+        System.out.println("\n\n===== EXPIRING QUOTES =====");
         homeQuote.expireQuote();
         autoQuote.expireQuote();
 
