@@ -13,9 +13,10 @@ public class HomeQuote extends Quote {
         this.homeValue = homeValue;
         this.ageFactor = ageFactor;
         this.heatingFactor = heatingFactor;
-        this.locationFactor = locationFactor;
+        this.locationFactor = locationFactor; // How exactly should this be handled? How do we determine urban/rural
     }
 
+    // TODO: Verify the calculation of the quote price
     @Override
     public void generateQuote() {
         // Convert full home value to thousands

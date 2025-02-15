@@ -13,9 +13,10 @@ public class AutoQuote extends Quote {
         this.driverAge = driverAge;
         this.accidentCount = accidentCount;
         this.vehicleAge = vehicleAge;
-        this.carValue = carValue;
+        this.carValue = carValue; // What impact does this have? Cant see how it would factor into the quote calculation
     }
 
+    // TODO: Verify the calculation of the quote price
     @Override
     public void generateQuote() {
         double ageFactor = (driverAge < 25) ? 2.0 : 1.0;

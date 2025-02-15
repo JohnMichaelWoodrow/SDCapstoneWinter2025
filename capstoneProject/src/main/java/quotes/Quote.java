@@ -10,7 +10,7 @@ public abstract class Quote {
 
     public Quote(int quoteId, String quoteType, double quotePrice, Date expiryDate) {
         this.quoteId = quoteId;
-        this.quoteType = quoteType; // Fixed: Passed via constructor
+        this.quoteType = quoteType; // Fixed: Passed via constructor (FunWithCapstone.java). Later will be dependent on payment (Active upon payment confirmation)
         this.quotePrice = quotePrice;
         this.expiryDate = expiryDate;
     }
