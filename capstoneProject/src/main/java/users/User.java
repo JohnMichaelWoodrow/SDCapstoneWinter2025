@@ -26,11 +26,11 @@ public abstract class User {
     }
 
     public void register() {
-        //TODO: Logic for register?
+        //TODO: Logic for register? ****AFTER CONSOLE APPLICATION****
     }
 
     public void login() {
-        //TODO: Logic for login?
+        //TODO: Logic for login? ****AFTER CONSOLE APPLICATION****
     }
 
     @Override

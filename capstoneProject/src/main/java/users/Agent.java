@@ -18,7 +18,7 @@ public class Agent extends User {
     }
 
     public void updateCustomerPolicy(Customer customer) {
-        //TODO: Logic for updating customer policy?
+        //TODO: Logic for updating customer policy? ****AFTER CONSOLE APPLICATION****
     }
 
     @Override
