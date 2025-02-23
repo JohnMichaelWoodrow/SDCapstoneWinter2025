@@ -1,9 +1,9 @@
 package users;
 
-public class Agent extends User {
+public class Admin extends User {
     private String role;
 
-    public Agent(int id, String name, String email, String role) {
+    public Admin(int id, String name, String email, String role) {
         super(id, name, email);
         this.role = role;
     }
@@ -17,17 +17,26 @@ public class Agent extends User {
         customer.displayUserInfo();
     }
 
+    public void viewAgentInfo(Agent agent) {
+        System.out.println("\nViewing Agent Information:");
+        agent.displayUserInfo();
+    }
+
     public void updateCustomerPolicy(Customer customer) {
         // TODO: Logic for updating customer policy? ****AFTER CONSOLE APPLICATION****
     }
 
+    public void updateAgentInfo(Agent agent) {
+        // TODO: Logic for updating agent info? ****AFTER CONSOLE APPLICATION****
+    }
+
     @Override
     public void displayUserInfo() {
-        System.out.println("Agent Info: " + this);
+        System.out.println("Admin Info: " + this);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (Agent - Role: " + role + ")";
+        return super.toString() + " (Admin - Role: " + role + ")";
     }
 }

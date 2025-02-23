@@ -13,7 +13,7 @@ public class AutoQuote extends Quote {
         this.driverAge = driverAge;
         this.accidentCount = accidentCount;
         this.vehicleAge = vehicleAge;
-        this.carValue = carValue; // What impact does this have? Cant see how it would factor into the quote calculation
+        this.carValue = carValue;
     }
 
     // TODO: Verify the calculation of the quote price
@@ -29,6 +29,7 @@ public class AutoQuote extends Quote {
 
     @Override
     public void expireQuote() {
+        // TODO: Implement logic for a auto quote expiring
         System.out.println("Auto Quote with ID " + quoteId + " has expired.");
     }
 

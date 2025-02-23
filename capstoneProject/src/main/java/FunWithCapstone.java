@@ -15,10 +15,6 @@ import java.util.*;
 
 // TODO: Change how expiry date is used. Right now its just today's date object that is passed in. How should it be calculated?
 
-// TODO: No input needed, make test cases for every scenario
-
-// TODO: Verify how we want to/need to display attributes/info
-
 public class FunWithCapstone {
     public static void main(String[] args) {
         // Create Quotes
@@ -61,6 +57,3 @@ public class FunWithCapstone {
 
     }
 }
-
-
-
