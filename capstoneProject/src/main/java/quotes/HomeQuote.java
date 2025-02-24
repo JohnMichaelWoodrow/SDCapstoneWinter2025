@@ -1,6 +1,10 @@
 package quotes;
 
+import users.Customer;
+
+import java.time.LocalDate;
 import java.util.Date;
+
 
 public class HomeQuote extends Quote {
     private double homeValue;
@@ -8,8 +12,8 @@ public class HomeQuote extends Quote {
     private double heatingFactor;
     private double locationFactor;
 
-    public HomeQuote(int quoteId, double quotePrice, Date expiryDate, double homeValue, double ageFactor, double heatingFactor, double locationFactor) {
-        super(quoteId, "Home", quotePrice, expiryDate); // Set quoteType to "Home"
+    public HomeQuote(int quoteId, double quotePrice, double homeValue, double ageFactor, double heatingFactor, double locationFactor) {
+        super(quoteId, "Home", quotePrice); // Set quoteType to "Home"
         this.homeValue = homeValue;
         this.ageFactor = ageFactor;
         this.heatingFactor = heatingFactor;
@@ -18,15 +22,29 @@ public class HomeQuote extends Quote {
 
     // TODO: Verify the calculation of the quote price
     @Override
-    public void generateQuote() {
-        // Convert full home value to thousands
+    public void generateQuote(Customer customer) {
         double homeValueInThousands = homeValue / 1000.0;
-        // Calculate additional premium for amounts above $250,000
         double additionalPremium = (homeValueInThousands > 250) ? (homeValueInThousands - 250) * 2 : 0;
-        // Base premium calculation with all risk factors
-        this.quotePrice = 500 * ageFactor * heatingFactor * locationFactor + additionalPremium;
-        System.out.println("Generated Home Insurance Quote: $" + quotePrice);
+
+        double originalPrice = 500 * ageFactor * heatingFactor * locationFactor + additionalPremium;
+        this.quotePrice = originalPrice; // Store original price first
+
+        System.out.println("Original Home Insurance Quote: $" + originalPrice); // Show price before discount
+
+        if (customer.hasActiveAutoPolicy(customer)) {
+            System.out.println("Applying 10% discount for existing auto policy.");
+            this.quotePrice *= 0.9;  // Apply discount
+        }
+
+        // Ensure the quote price is properly stored
+        setQuotePrice(this.quotePrice);
+
+        System.out.println("Final Home Insurance Quote: $" + this.quotePrice);
     }
+
+
+
+
 
     @Override
     public void expireQuote() {

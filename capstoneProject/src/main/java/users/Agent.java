@@ -12,6 +12,10 @@ public class Agent extends User {
         return role;
     }
 
+    public String setRole(String role) {
+        return this.role = role;
+    }
+
     public void viewCustomerInfo(Customer customer) {
         System.out.println("\nViewing Customer Information:");
         customer.displayUserInfo();

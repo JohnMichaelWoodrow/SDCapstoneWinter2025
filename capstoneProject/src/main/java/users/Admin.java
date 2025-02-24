@@ -12,6 +12,10 @@ public class Admin extends User {
         return role;
     }
 
+    public String setRole(String role) {
+        return this.role = role;
+    }
+
     public void viewCustomerInfo(Customer customer) {
         System.out.println("\nViewing Customer Information:");
         customer.displayUserInfo();
@@ -26,8 +30,12 @@ public class Admin extends User {
         // TODO: Logic for updating customer policy? ****AFTER CONSOLE APPLICATION****
     }
 
-    public void updateAgentInfo(Agent agent) {
-        // TODO: Logic for updating agent info? ****AFTER CONSOLE APPLICATION****
+    public void editUser(User user) {
+        // TODO: Logic for editing user? ****AFTER CONSOLE APPLICATION****
+    }
+
+    public void removeUser(User user) {
+        // TODO: Logic for removing user? ****AFTER CONSOLE APPLICATION****
     }
 
     @Override

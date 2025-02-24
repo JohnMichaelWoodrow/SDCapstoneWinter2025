@@ -21,6 +21,24 @@ public class Customer extends User {
         System.out.println("Policy added to customer " + name);
     }
 
+    public boolean hasActiveAutoPolicy(Customer customer) {
+        for (Policy policy : customer.getPolicies()) {
+            if (policy.getPolicyType().equalsIgnoreCase("Auto") && policy.getStatus().equalsIgnoreCase("Active")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasActiveHomePolicy(Customer customer) {
+        for (Policy policy : customer.getPolicies()) {
+            if (policy.getPolicyType().equalsIgnoreCase("Home") && policy.getStatus().equalsIgnoreCase("Active")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void displayUserInfo() {
         System.out.println("Customer Info: " + this);
