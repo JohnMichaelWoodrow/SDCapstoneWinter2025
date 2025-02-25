@@ -249,7 +249,7 @@ public class FunWithCapstone {
         customer.displayUserInfo();
     }
 
-    // Invalid Cases & Edge Cases ***CURRENTLY NOT HANDLED***
+    // Invalid Cases & Edge Cases ***Invalid email handled. Need to implement checks for ID and Name***
     private static void testInvalidScenarios() {
         System.out.println("\n[Test] Invalid Scenarios");
         try {

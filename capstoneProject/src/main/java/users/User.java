@@ -1,14 +1,22 @@
 package users;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 public abstract class User {
     protected int id;
     protected String name;
     protected String email;
+    protected static final String EMAIL_REGEX = "^[^@]+@[^@]+\\.com$";
+    protected static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
     public User(int id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.email = email;
+        if(isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email address: " + email);
+        } else
+            this.email = email;
     }
 
     public abstract void displayUserInfo();
@@ -29,12 +37,20 @@ public abstract class User {
         return this.name = name;
     }
 
+    public boolean isValidEmail(String email) {
+        Matcher matcher = EMAIL_PATTERN.matcher(email);
+        return !matcher.matches();
+    }
+
     public String getEmail() {
         return email;
     }
 
-    public String setEmail(String email) {
-        return this.email = email;
+    public void setEmail(String email) {
+        if (isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+        this.email = email;
     }
 
     public void register() {
