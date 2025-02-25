@@ -16,9 +16,22 @@ public class Customer extends User {
         return policies;
     }
 
-    public void addPolicy(Policy policy) {
-        policies.add(policy);
-        System.out.println("Policy added to customer " + name);
+    public void addPolicy(Customer customer, Policy policy) {
+        if (policy.getPolicyType().equalsIgnoreCase("Home")) {
+            if (!hasActiveHomePolicy(customer)) {
+                policies.add(policy);
+                System.out.println("Policy added to customer: " + name);
+            } else {
+                throw new RuntimeException("Customer has reached active home policy limit");
+            }
+        } else if (policy.getPolicyType().equalsIgnoreCase("Auto")) {
+            if (!reachedAutoPolicyLimit(customer)) {
+                policies.add(policy);
+                System.out.println("Policy added to customer: " + name);
+            } else {
+                throw new RuntimeException("Customer has reached active auto policy limit");
+            }
+        }
     }
 
     public boolean hasActiveAutoPolicy(Customer customer) {
@@ -34,6 +47,20 @@ public class Customer extends User {
         for (Policy policy : customer.getPolicies()) {
             if (policy.getPolicyType().equalsIgnoreCase("Home") && policy.getStatus().equalsIgnoreCase("Active")) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean reachedAutoPolicyLimit(Customer customer) {
+        int autoPolicyLimit = 2;
+        int customerAutoPolicyCount = 0;
+        for (Policy policy : customer.getPolicies()) {
+            if (policy.getPolicyType().equalsIgnoreCase("Auto") && policy.getStatus().equalsIgnoreCase("Active")) {
+                customerAutoPolicyCount++;
+                if (customerAutoPolicyCount == autoPolicyLimit) {
+                    return true;
+                }
             }
         }
         return false;

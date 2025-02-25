@@ -4,9 +4,6 @@
  * Tests for various scenarios are included to ensure the project is working as expected.
  *
  */
-
-package main;
-
 import users.*;
 import policy.*;
 import quotes.*;
@@ -29,7 +26,8 @@ public class FunWithCapstone {
         testAgentCustomerInteraction();
         testHomeAutoDiscounts();
         testMultipleAutoPolicies();
-        testExceedingPolicyLimits();
+        testExceedingAutoPolicyLimits();
+        testExceedingHomePolicyLimits();
         testAutoQuoteVariations();
         testHomeQuoteVariations();
         testPolicyCancellation();
@@ -64,7 +62,7 @@ public class FunWithCapstone {
         homeQuote.generateQuote(customer);
         homeQuote.payForQuote();
         Policy homePolicy = new Policy("H-001", homeQuote, "Home", homeQuote.getPaymentDate());
-        customer.addPolicy(homePolicy);
+        customer.addPolicy(customer,homePolicy);
         customer.displayUserInfo();
     }
 
@@ -116,7 +114,7 @@ public class FunWithCapstone {
         homeQuote.payForQuote();
         System.out.println("Final Home Quote Price (Stored in Policy): $" + homeQuote.getQuotePrice());
         Policy homePolicy = new Policy("H-1001", homeQuote, "Home", homeQuote.getPaymentDate());
-        customer.addPolicy(homePolicy);
+        customer.addPolicy(customer, homePolicy);
 
         // Auto policy
         AutoQuote autoQuote = new AutoQuote(1002, 0, 30, 0, 5, 20000);
@@ -125,7 +123,7 @@ public class FunWithCapstone {
         autoQuote.payForQuote();
         System.out.println("Final Auto Quote Price (Stored in Policy): $" + autoQuote.getQuotePrice());
         Policy autoPolicy = new Policy("A-1002", autoQuote, "Auto", autoQuote.getPaymentDate());
-        customer.addPolicy(autoPolicy);
+        customer.addPolicy(customer, autoPolicy);
 
         System.out.println("\nExpected: 10% discount applied to both policies.");
         System.out.println("Comparison:");
@@ -146,21 +144,21 @@ public class FunWithCapstone {
         firstCar.generateQuote(customer);
         firstCar.payForQuote();
         Policy firstCarPolicy = new Policy("A-2001", firstCar, "Auto", firstCar.getPaymentDate());
-        customer.addPolicy(firstCarPolicy);
+        customer.addPolicy(customer, firstCarPolicy);
 
         AutoQuote secondCar = new AutoQuote(2002, 0, 40, 1, 8, 18000);
         secondCar.generateQuote(customer);
         secondCar.payForQuote();
         Policy secondCarPolicy = new Policy("A-2002", secondCar, "Auto", secondCar.getPaymentDate());
-        customer.addPolicy(secondCarPolicy);
+        customer.addPolicy(customer, secondCarPolicy);
 
         System.out.println("Expected: Customer with two active auto policies.");
         customer.displayUserInfo();
     }
 
-    // Exceeding Policy Limits ***NOT HANDLED***
-    private static void testExceedingPolicyLimits() {
-        System.out.println("\n[Test] Exceeding Policy Limits");
+    // Exceeding Auto Policy Limit
+    private static void testExceedingAutoPolicyLimits() {
+        System.out.println("\n[Test] Exceeding Auto Policy Limits");
         Customer customer = new Customer(6, "Laura Smith", "laura.smith@gmail.com");
         try {
             for (int i = 1; i <= 4; i++) {
@@ -168,7 +166,24 @@ public class FunWithCapstone {
                 autoQuote.generateQuote(customer);
                 autoQuote.payForQuote();
                 Policy autoPolicy = new Policy("A-500" + i, autoQuote, "Auto", autoQuote.getPaymentDate());
-                customer.addPolicy(autoPolicy);
+                customer.addPolicy(customer, autoPolicy);
+            }
+        } catch (Exception e) {
+            System.out.println("Expected Error: " + e.getMessage());
+        }
+    }
+
+    //Exceeding Home Policy Limit
+    private static void testExceedingHomePolicyLimits() {
+        System.out.println("\n[Test] Exceeding Home Policy Limits");
+        Customer customer = new Customer(7, "Ian Somerton", "ian.somerton@gmail.com");
+        try {
+            for (int i = 1; i <= 3; i++) {
+                HomeQuote homeQuote = new HomeQuote(1001, 0, 400000, 1.2, 1.1, 1.0);
+                homeQuote.generateQuote(customer);
+                homeQuote.payForQuote();
+                Policy homePolicy = new Policy("A-1001", homeQuote, "Home", homeQuote.getPaymentDate());
+                customer.addPolicy(customer, homePolicy);
             }
         } catch (Exception e) {
             System.out.println("Expected Error: " + e.getMessage());
@@ -229,7 +244,7 @@ public class FunWithCapstone {
         autoQuote.generateQuote(customer);
         autoQuote.payForQuote();
         Policy autoPolicy = new Policy("A-601", autoQuote, "Auto", autoQuote.getPaymentDate());
-        customer.addPolicy(autoPolicy);
+        customer.addPolicy(customer, autoPolicy);
         autoPolicy.setStatus("Cancelled");
         customer.displayUserInfo();
     }
