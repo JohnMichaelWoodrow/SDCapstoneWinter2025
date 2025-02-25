@@ -1,0 +1,30 @@
+# IntelliJ IDEA project files
+.idea/
+*.iml
+workspace.xml
+
+# Maven & Gradle files
+.mvn/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+
+# Build directories
+out/
+bin/
+*.class
+*.war
+*.jar
+
+# Logs
+logs/
+*.log
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
