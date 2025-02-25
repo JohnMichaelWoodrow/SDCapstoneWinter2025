@@ -21,39 +21,68 @@
 
     <div class="pagemaindiv">
         <h2>Happy Thursday Josh!</h2>
-        <table id="quoteTable">
-            <caption id="quoteTableCaption">Plans for you</caption>
-            <tr>
-                <th class="quoteTableHeader">Plan</th>
-                <th class="quoteTableHeader">Length</th>
-                <th class="quoteTableHeader">Members</th>
-                <th class="quoteTableHeader">Cost</th>
-            </tr>
-            <tr>
-                <td class="quoteTableCell">Individual</td>
-                <td class="quoteTableCell">1 Year</td>
-                <td class="quoteTableCell">Max 1</td>
-                <td class="quoteTableCell">$500/Month</td>
-            </tr>
-            <tr>
-                <td class="quoteTableCell">Starter</td>
-                <td class="quoteTableCell">1 Year</td>
-                <td class="quoteTableCell">Max 2</td>
-                <td class="quoteTableCell">$850/Month</td>
-            </tr>
-            <tr>
-                <td class="quoteTableCell">Family</td>
-                <td class="quoteTableCell">1 Year</td>
-                <td class="quoteTableCell">Max 4</td>
-                <td class="quoteTableCell">$1700/Month</td>
-            </tr>
-            <tr>
-                <td class="quoteTableCell">Premium</td>
-                <td class="quoteTableCell">1 Year</td>
-                <td class="quoteTableCell">Max 8</td>
-                <td class="quoteTableCell">$3300/Month</td>
-            </tr>
-        </table>
+        <%--        <table id="quoteTable">--%>
+        <%--            <caption id="quoteTableCaption">Plans for you</caption>--%>
+        <%--            <tr>--%>
+        <%--                <th class="quoteTableHeader">Plan</th>--%>
+        <%--                <th class="quoteTableHeader">Length</th>--%>
+        <%--                <th class="quoteTableHeader">Members</th>--%>
+        <%--                <th class="quoteTableHeader">Cost</th>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td class="quoteTableCell">Individual</td>--%>
+        <%--                <td class="quoteTableCell">1 Year</td>--%>
+        <%--                <td class="quoteTableCell">Max 1</td>--%>
+        <%--                <td class="quoteTableCell">$500/Month</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td class="quoteTableCell">Starter</td>--%>
+        <%--                <td class="quoteTableCell">1 Year</td>--%>
+        <%--                <td class="quoteTableCell">Max 2</td>--%>
+        <%--                <td class="quoteTableCell">$850/Month</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td class="quoteTableCell">Family</td>--%>
+        <%--                <td class="quoteTableCell">1 Year</td>--%>
+        <%--                <td class="quoteTableCell">Max 4</td>--%>
+        <%--                <td class="quoteTableCell">$1700/Month</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td class="quoteTableCell">Premium</td>--%>
+        <%--                <td class="quoteTableCell">1 Year</td>--%>
+        <%--                <td class="quoteTableCell">Max 8</td>--%>
+        <%--                <td class="quoteTableCell">$3300/Month</td>--%>
+        <%--            </tr>--%>
+        <%--        </table>--%>
+        <div id="getAQuoteDiv">
+            <form class="getAQuoteForm">
+                <h2 class="getAQuoteHeader">Get a Auto Quote</h2>
+                <label for="driverAge">Driver Age: </label>
+                <input class="quoteInput" type="text" id="driverAge"><br>
+                <label for="accidentCount">Accident Count: </label>
+                <input class="quoteInput" type="text" id="accidentCount"><br>
+                <label for="vehicleAge">Vehicle Age: </label>
+                <input class="quoteInput" type="text" id="vehicleAge"><br>
+                <label for="vehicleValue">Vehicle Value: </label>
+                <input class="quoteInput" type="text" id="vehicleValue"><br>
+                <label for="total">Total: </label>
+                <input class="quoteInput" type="text" id="total" disabled><br>
+                <button class="calculateQuoteBtn">Calculate</button>
+            </form>
+
+            <form class="getAQuoteForm">
+                <h2 class="getAQuoteHeader">Get a Home Quote</h2>
+                <label for="homeValue">Home Value: </label>
+                <input class="quoteInput" type="text" id="homeValue"><br>
+                <label for="location">Home Location: </label>
+                <input class="quoteInput" type="text" id="location"><br>
+                <label for="age">Home Age: </label>
+                <input class="quoteInput" type="text" id="age"><br>
+                <label for="totalHome">Total: </label>
+                <input class="quoteInput" type="text" id="totalHome" disabled><br>
+                <button class="calculateQuoteBtn">Calculate</button>
+            </form>
+        </div>
     </div>
 
     <div class="pagemaindiv">
