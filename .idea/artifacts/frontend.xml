@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="frontend">
+    <output-path>$PROJECT_DIR$/frontend/webapp</output-path>
+    <root id="root" />
+  </artifact>
+</component>
