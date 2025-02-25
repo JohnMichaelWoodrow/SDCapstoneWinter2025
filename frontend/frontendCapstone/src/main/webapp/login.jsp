@@ -1,24 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: lucas_aop04az
-  Date: 2025-02-24
-  Time: 6:41 p.m.
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Login/Register</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="images/TaylorIns-inv.png">
 </head>
 <body>
 <div id="maindiv">
     <div id="navbar">
-        <img id="navbarimg" src="images/Mergabyte_processed.png">
+        <a href="index.jsp"><img id="navbarimg" src="images/TaylorIns-inv.png"></a>
         <div id="navbarbuttons">
             <a class="navbarbtn" href="index.jsp">Home</a>
-            <a class="navbarbtn" href="index.jsp">Test</a>
-            <a class="navbarbtn" href="index.jsp">About Us</a>
+            <a class="navbarbtn" href="quote.jsp">Get a Quote</a>
+            <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
             <a href="login.jsp"><img id="profileimg" src="images/profile.jpg"></a>
@@ -27,16 +21,16 @@
 
     <div id="pagemaindiv">
         <div id="loginregdiv">
-            <form id="loginform">
+            <form id="loginform" action="quote.jsp">
                 <h2>Login</h2>
                 <label for="logemail">Email: </label>
-                <input class="logininput" type="text" id="logemail"><br>
+                <input class="logininput" type="text" value="JoshTaylor@taylorinsurance.ca" id="logemail"><br>
                 <label for="logpassword">Password: </label>
-                <input class="logininput" type="text" id="logpassword"><br>
+                <input class="logininput" type="password" id="logpassword"><br>
                 <button class="loginregbtn" type="submit">Login</button>
             </form>
             <h2>Or</h2>
-            <form id="registerform">
+            <form id="registerform" action="quote.jsp">
                 <h2>Register</h2>
                 <label for="fname">First Name: </label>
                 <input class="logininput" type="text" id="fname"><br>
@@ -51,9 +45,9 @@
                 <label for="provinceState">Province/State: </label>
                 <input class="logininput" type="text" id="provinceState"><br>
                 <label for="regpassword">Password: </label>
-                <input class="logininput" type="text" id="regpassword"><br>
+                <input class="logininput" type="password" id="regpassword"><br>
                 <label for="confpassword">Confirm Password: </label>
-                <input class="logininput" type="text" id="confpassword"><br>
+                <input class="logininput" type="password" id="confpassword"><br>
                 <button class="loginregbtn" type="submit">Register</button>
             </form>
         </div>

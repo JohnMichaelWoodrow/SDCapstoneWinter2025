@@ -1,8 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home</title>
+    <title>About</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="images/TaylorIns-inv.png">
 </head>
@@ -13,7 +12,7 @@
         <div id="navbarbuttons">
             <a class="navbarbtn" href="index.jsp">Home</a>
             <a class="navbarbtn" href="login.jsp">Get a Quote</a>
-            <a class="navbarbtn" href="about.jsp">About Us</a>
+            <a class="navbarbtn" href="index.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
             <a href="login.jsp"><img id="profileimg" src="images/profile.jpg"></a>
@@ -21,14 +20,8 @@
     </div>
 
     <div id="pagemaindiv">
-        <h2>Welcome!</h2>
-        <p>We take pride in having the best coverage for you and your family.</p>
-        <div id="createAccountLink">
-            <h3>Create an account to get started!</h3>
-            <a id="createAccountbtn" href="login.jsp">Create Account</a>
-        </div>
+        <h2>About Us</h2>
     </div>
 </div>
-
 </body>
 </html>
