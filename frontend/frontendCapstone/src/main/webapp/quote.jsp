@@ -49,20 +49,20 @@
     </div>
 
     <div class="pagemaindiv">
-        <h2>Your Plans</h2>
+        <h2>Your Policies</h2>
         <table id="yourPlansTable">
-            <caption id="yourPlansTableCaption">Your Current Plans</caption>
+            <caption id="yourPlansTableCaption">Your Current Policies</caption>
             <tr>
-                <th class="quoteTableHeader">Plan</th>
+                <th class="quoteTableHeader">Type</th>
                 <th class="quoteTableHeader">Remaining</th>
-                <th class="quoteTableHeader">Members</th>
+                <th class="quoteTableHeader">Date Paid</th>
                 <th class="quoteTableHeader">Cost</th>
             </tr>
             <tr>
-                <td class="quoteTableCell">Family</td>
+                <td class="quoteTableCell">Auto</td>
                 <td class="quoteTableCell">4 Months</td>
-                <td class="quoteTableCell">3/4</td>
-                <td class="quoteTableCell">$1700/Month</td>
+                <td class="quoteTableCell">2024-01-01</td>
+                <td class="quoteTableCell">$750</td>
             </tr>
         </table>
     </div>
