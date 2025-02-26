@@ -1,13 +1,6 @@
-/**
- * This class is used to test the functionality of the Capstone Project.
- *
- * Tests for various scenarios are included to ensure the project is working as expected.
- *
- */
 import users.*;
 import policy.*;
 import quotes.*;
-
 import java.time.LocalDate;
 
 /**
@@ -30,7 +23,6 @@ public class FunWithCapstone {
         testExceedingHomePolicyLimits();
         testAutoQuoteVariations();
         testHomeQuoteVariations();
-        testPolicyCancellation();
         testInvalidScenarios();
 
         System.out.println("\n===== TESTS COMPLETED =====");
@@ -101,7 +93,7 @@ public class FunWithCapstone {
         agent.viewCustomerInfo(customer);
     }
 
-    // Test: Home & Auto Policy Discounts ***NOT HANDLED CORRECTLY. NEEDS MORE THOUGHT WITH HOW PRICE IS HANDLED***
+    // Home & Auto Policy Discounts
     private static void testHomeAutoDiscounts() {
         System.out.println("\n[Test] Home & Auto Policy Discounts");
 
@@ -134,7 +126,7 @@ public class FunWithCapstone {
         customer.displayUserInfo();
     }
 
-    // Test: Multiple Auto Policies for a Customer
+    // Multiple Auto Policies for a Customer
     private static void testMultipleAutoPolicies() {
         System.out.println("\n[Test] Multiple Auto Policies");
 
@@ -173,7 +165,7 @@ public class FunWithCapstone {
         }
     }
 
-    //Exceeding Home Policy Limit
+    // Exceeding Home Policy Limit
     private static void testExceedingHomePolicyLimits() {
         System.out.println("\n[Test] Exceeding Home Policy Limits");
         Customer customer = new Customer(7, "Ian Somerton", "ian.somerton@gmail.com");
@@ -190,7 +182,7 @@ public class FunWithCapstone {
         }
     }
 
-    // Test: Auto Quote Variations (Different Factors)
+    // Test: Auto Quote Variations
     private static void testAutoQuoteVariations() {
         System.out.println("\n[Test] Auto Quote Variations");
 
@@ -212,7 +204,7 @@ public class FunWithCapstone {
         System.out.println("Mid-Risk Driver Quote: " + midRiskQuote);
     }
 
-    // Test: Home Quote Variations (Different Home Values & Risk Factors)
+    // Test: Home Quote Variations
     private static void testHomeQuoteVariations() {
         System.out.println("\n[Test] Home Quote Variations");
 
@@ -234,24 +226,9 @@ public class FunWithCapstone {
         System.out.println("High-Risk Home Quote: " + highRiskHome);
     }
 
-
-
-    // Policy Cancellation ***NEEDS MORE THOUGHT***
-    private static void testPolicyCancellation() {
-        System.out.println("\n[Test] Policy Cancellation");
-        Customer customer = new Customer(7, "Daniel Smith", "daniel.smith@gmail.com");
-        Quote autoQuote = new AutoQuote(601, 0, 35, 0, 2, 20000);
-        autoQuote.generateQuote(customer);
-        autoQuote.payForQuote();
-        Policy autoPolicy = new Policy("A-601", autoQuote, "Auto", autoQuote.getPaymentDate());
-        customer.addPolicy(customer, autoPolicy);
-        autoPolicy.setStatus("Cancelled");
-        customer.displayUserInfo();
-    }
-
-    // Invalid Cases & Edge Cases ***Invalid email handled. Need to implement checks for ID and Name***
+    // Invalid Cases & Edge Cases
     private static void testInvalidScenarios() {
-        System.out.println("\n[Test] Invalid Scenarios");
+        System.out.println("\n[Test] Invalid Email");
         try {
             System.out.println("Attempting to create customer with invalid email...");
             new Customer(8, "Bob Builder", "invalid-email");

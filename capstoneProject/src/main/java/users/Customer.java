@@ -4,6 +4,9 @@ import policy.Policy;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Customer in the insurance system.
+ */
 public class Customer extends User {
     private List<Policy> policies;
 

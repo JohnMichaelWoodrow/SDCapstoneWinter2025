@@ -2,12 +2,14 @@ package quotes;
 
 import policy.Policy;
 import users.Customer;
-
 import java.time.LocalDate;
 
+/**
+ * Represents a Quote in the insurance system.
+ */
 public abstract class Quote {
     protected int quoteId;
-    protected String quoteType; // Home or Auto
+    protected String quoteType;
     protected double quotePrice;
     protected LocalDate expiryDate;
     protected boolean isPaid;
@@ -17,9 +19,9 @@ public abstract class Quote {
         this.quoteId = quoteId;
         this.quoteType = quoteType;
         this.quotePrice = quotePrice;
-        this.expiryDate = LocalDate.now().plusDays(30); // Quote expires after 30 days
-        this.isPaid = false; // Default status: not paid
-        this.paymentDate = null; // Payment date starts as null
+        this.expiryDate = LocalDate.now().plusDays(30);
+        this.isPaid = false;
+        this.paymentDate = null;
     }
 
     // Abstract methods to be implemented in subclasses

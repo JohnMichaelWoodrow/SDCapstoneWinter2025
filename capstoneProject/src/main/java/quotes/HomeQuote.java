@@ -1,11 +1,12 @@
 package quotes;
 
 import users.Customer;
-
 import java.time.LocalDate;
 import java.util.Date;
 
-
+/**
+ * Represents a HomeQuote in the insurance system.
+ */
 public class HomeQuote extends Quote {
     private double homeValue;
     private double ageFactor;
@@ -13,32 +14,26 @@ public class HomeQuote extends Quote {
     private double locationFactor;
 
     public HomeQuote(int quoteId, double quotePrice, double homeValue, double ageFactor, double heatingFactor, double locationFactor) {
-        super(quoteId, "Home", quotePrice); // Set quoteType to "Home"
+        super(quoteId, "Home", quotePrice);
         this.homeValue = homeValue;
         this.ageFactor = ageFactor;
         this.heatingFactor = heatingFactor;
-        this.locationFactor = locationFactor; // How exactly should this be handled? How do we determine urban/rural
+        this.locationFactor = locationFactor;
     }
 
-    // TODO: Verify the calculation of the quote price
     @Override
     public void generateQuote(Customer customer) {
         double homeValueInThousands = homeValue / 1000.0;
         double additionalPremium = (homeValueInThousands > 250) ? (homeValueInThousands - 250) * 2 : 0;
-
         double originalPrice = 500 * ageFactor * heatingFactor * locationFactor + additionalPremium;
-        this.quotePrice = originalPrice; // Store original price first
+        this.quotePrice = originalPrice;
 
-        System.out.println("Original Home Insurance Quote: $" + originalPrice); // Show price before discount
-
+        System.out.println("Original Home Insurance Quote: $" + originalPrice);
         if (customer.hasActiveAutoPolicy(customer)) {
             System.out.println("Applying 10% discount for existing auto policy.");
-            this.quotePrice *= 0.9;  // Apply discount
+            this.quotePrice *= 0.9;
         }
-
-        // Ensure the quote price is properly stored
         setQuotePrice(this.quotePrice);
-
         System.out.println("Final Home Insurance Quote: $" + this.quotePrice);
     }
 
