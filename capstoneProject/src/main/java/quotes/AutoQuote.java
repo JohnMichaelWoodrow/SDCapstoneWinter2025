@@ -1,9 +1,12 @@
 package quotes;
 
 import users.Customer;
-
 import java.time.LocalDate;
 import java.util.Date;
+
+/**
+ * Represents a AutoQuote in the insurance system.
+ */
 
 public class AutoQuote extends Quote {
     private int driverAge;
@@ -24,20 +27,16 @@ public class AutoQuote extends Quote {
         double ageFactor = (driverAge < 25) ? 2.0 : 1.0;
         double accidentFactor = (accidentCount == 0) ? 1.0 : (accidentCount == 1) ? 1.25 : 2.5;
         double vehicleAgeFactor = (vehicleAge > 10) ? 2.0 : (vehicleAge > 5) ? 1.5 : 1.0;
-
         double originalPrice = 750 * ageFactor * vehicleAgeFactor * accidentFactor;
         this.quotePrice = originalPrice; // Store original price first
 
         System.out.println("Original Auto Insurance Quote: $" + originalPrice); // Show price before discount
-
         if (customer.hasActiveHomePolicy(customer)) {
             System.out.println("Applying 10% discount for existing home policy.");
             this.quotePrice *= 0.9;  // Apply discount
         }
-
         // Ensure the quote price is properly stored
         setQuotePrice(this.quotePrice);
-
         System.out.println("Final Auto Insurance Quote: $" + this.quotePrice);
     }
 

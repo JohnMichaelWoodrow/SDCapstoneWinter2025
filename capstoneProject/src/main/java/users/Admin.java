@@ -1,5 +1,8 @@
 package users;
 
+/**
+ * Represents an Admin in the insurance system.
+ */
 public class Admin extends User {
     private String role;
 

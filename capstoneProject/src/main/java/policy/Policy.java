@@ -3,6 +3,9 @@ package policy;
 import quotes.Quote;
 import java.time.LocalDate;
 
+/**
+ * Represents a Policy in the insurance system.
+ */
 public class Policy {
     private String policyNumber;
     private Quote quote;

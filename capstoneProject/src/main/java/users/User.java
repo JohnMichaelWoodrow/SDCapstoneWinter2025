@@ -3,6 +3,9 @@ package users;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+/**
+ * Represents a user in the insurance system.
+ */
 public abstract class User {
     protected int id;
     protected String name;
