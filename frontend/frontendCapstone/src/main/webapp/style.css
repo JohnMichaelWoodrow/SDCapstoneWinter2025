@@ -6,7 +6,7 @@ body {
 
 #navbar {
     background-color: lightskyblue;
-    height: 10%;
+    height: 100px;
     width: 100%;
     display: flex;
     border-bottom: 3px solid darkgray;
@@ -15,7 +15,7 @@ body {
 
 #maindiv {
     width: 100%;
-    height: 1000px;
+    /*height: 1000px;*/
     background-color: white;
     border-color: rgb(128, 128, 128);
     border-width: 2px;
@@ -212,6 +212,7 @@ body {
     font-size: 120%;
     border-radius: 5px;
     color: white;
+    /*margin-bottom: 500px;*/
 }
 
 #createAccountbtn:hover {
@@ -221,10 +222,15 @@ body {
 #createAccountLink {
     text-align: center;
     padding-bottom: 20px;
+    margin-bottom: 500px;
 }
 
 .getAQuoteForm {
     margin: 0 auto;
+    border: 3px solid darkgray;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 #getAQuoteDiv {
@@ -234,6 +240,12 @@ body {
 
 .quoteInput {
     margin-bottom: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: lightskyblue;
+    padding: 5px;
+    font-size: 100%;
 }
 
 .calculateQuoteBtn {
@@ -249,4 +261,68 @@ body {
 
 .calculateQuoteBtn:hover {
     background-color: lightskyblue;
+}
+
+#quoteSummaryTable {
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#quoteSummaryTable th {
+    background-color: lightskyblue;
+    padding: 10px;
+    border-bottom: 2px solid darkgray;
+    font-size: 120%;
+}
+
+#quoteSummaryTable td {
+    background-color: lightgray;
+    padding: 10px;
+    border-bottom: 2px solid darkgray;
+    font-size: 120%;
+}
+
+#quoteSummaryTable caption {
+    background-color: navy;
+    color: white;
+    padding: 10px;
+    font-size: 150%;
+}
+
+.quoteActionBtn {
+    background-color: navy;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 120%;
+    border-radius: 10px;
+}
+
+.quoteActionBtn:hover {
+    background-color: #000023;
+}
+
+#quoteActionDiv {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+footer {
+    background-color: #000023;
+    height: 150px;
+    border-top: 3px solid darkgray;
+    margin-bottom: 0;
+
+}
+
+footer h3 {
+    color: white;
+    text-align: center;
+}
+
+#contactDiv {
+    text-align: center;
+    color: white;
 }

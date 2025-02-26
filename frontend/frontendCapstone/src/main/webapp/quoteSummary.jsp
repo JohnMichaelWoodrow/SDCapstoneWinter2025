@@ -20,7 +20,30 @@
     </div>
 
     <div id="pagemaindiv">
-        <h2>About Us</h2>
+        <h2>Quote Summary</h2>
+        <table id="quoteSummaryTable">
+            <caption>Quote Summary</caption>
+            <tr>
+                <th>Quote Type: </th>
+                <td>Auto</td>
+            </tr>
+            <tr>
+                <th>Expiry Date: </th>
+                <td>2026-01-01</td>
+            </tr>
+            <tr>
+                <th>Total: </th>
+                <td>$750</td>
+            </tr>
+            <tr>
+                <th>Payment Date: </th>
+                <td>N/A</td>
+            </tr>
+        </table>
+        <div id="quoteActionDiv">
+            <button class="quoteActionBtn">Purchase</button>
+            <button class="quoteActionBtn">Cancel</button>
+        </div>
     </div>
 </div>
 </body>

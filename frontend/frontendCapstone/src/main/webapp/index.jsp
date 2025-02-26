@@ -29,6 +29,16 @@
         </div>
     </div>
 </div>
+<%--<footer>--%>
+<%--    <h2>foot</h2>--%>
+<%--</footer>--%>
 
 </body>
+<footer>
+    <div id="contactDiv">
+        <h3>Contact Us</h3>
+        <p>Email: support@taylorinsurance.com</p>
+        <p>Phone: +1 (709) 123-4567</p>
+    </div>
+</footer>
 </html>
