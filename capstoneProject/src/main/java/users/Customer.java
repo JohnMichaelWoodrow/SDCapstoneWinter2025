@@ -3,9 +3,9 @@ package users;
 import objects.Home;
 import objects.Vehicle;
 import policy.Policy;
+import policy.PolicyFactory;
 import quotes.Quote;
 import quotes.QuoteFactory;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,24 +40,20 @@ public class Customer extends User {
 
     /**
      * Request a new Home Insurance Quote.
+     * The discount logic is handled inside `QuoteFactory`.
      */
     public Quote requestHomeQuote(Home home) {
-        boolean hasAutoPolicy = policies.stream().anyMatch(p -> p.getPolicyType().equalsIgnoreCase("Auto") && p.getStatus().equals("Active"));
-        double discountFactor = hasAutoPolicy ? 0.9 : 1.0; // 10% discount if an auto policy exists
-
-        Quote homeQuote = QuoteFactory.createHomeQuote(quotes.size() + 1, home, 1000.0 * discountFactor);
+        Quote homeQuote = QuoteFactory.createHomeQuote(this, home);
         quotes.add(homeQuote);
         return homeQuote;
     }
 
     /**
      * Request a new Auto Insurance Quote.
+     * The discount logic is handled inside `QuoteFactory`.
      */
     public Quote requestAutoQuote(Vehicle vehicle, int driverAge, int accidentCount) {
-        boolean hasHomePolicy = policies.stream().anyMatch(p -> p.getPolicyType().equalsIgnoreCase("Home") && p.getStatus().equals("Active"));
-        double discountFactor = hasHomePolicy ? 0.9 : 1.0; // 10% discount if a home policy exists
-
-        Quote autoQuote = QuoteFactory.createAutoQuote(quotes.size() + 1, vehicle, driverAge, accidentCount, 1200.0 * discountFactor);
+        Quote autoQuote = QuoteFactory.createAutoQuote(this, vehicle, driverAge, accidentCount);
         quotes.add(autoQuote);
         return autoQuote;
     }
@@ -70,6 +66,9 @@ public class Customer extends User {
         if (!quotes.contains(quote)) {
             throw new IllegalArgumentException("Quote does not exist for this customer.");
         }
+        if (quote.isExpired()) {
+            throw new IllegalStateException("Cannot pay for an expired quote.");
+        }
         quote.markAsPaid();
         paidQuotes.add(quote);
         quotes.remove(quote);
@@ -80,37 +79,7 @@ public class Customer extends User {
      * Converts a paid Quote into a Policy.
      */
     public Policy createPolicyFromQuote(Quote quote) {
-        if (!paidQuotes.contains(quote)) {
-            throw new IllegalStateException("Quote must be paid before converting to a Policy.");
-        }
-
-        String policyType = quote.getQuoteType();
-        if (policyType.equalsIgnoreCase("Home") && getActivePolicyCount("Home") >= HOME_POLICY_LIMIT) {
-            throw new IllegalStateException("Customer has reached active home policy limit.");
-        }
-
-        if (policyType.equalsIgnoreCase("Auto") && getActivePolicyCount("Auto") >= AUTO_POLICY_LIMIT) {
-            throw new IllegalStateException("Customer has reached active auto policy limit.");
-        }
-
-        Policy policy = new Policy("P-" + (policies.size() + 1), quote, policyType);
-        policies.add(policy);
-        paidQuotes.remove(quote);
-        return policy;
-    }
-
-    /**
-     * Cancels an active policy before expiry.
-     */
-    public void cancelPolicy(Policy policy) {
-        if (!policies.contains(policy)) {
-            throw new IllegalArgumentException("Policy does not belong to this customer.");
-        }
-        if (!policy.getStatus().equalsIgnoreCase("Active")) {
-            throw new IllegalStateException("Only active policies can be canceled.");
-        }
-        policy.setStatus("Cancelled");
-        System.out.println("Policy " + policy.getPolicyNumber() + " has been canceled.");
+        return PolicyFactory.createPolicy(this, quote);
     }
 
     /**
