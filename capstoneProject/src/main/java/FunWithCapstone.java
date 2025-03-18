@@ -1,7 +1,13 @@
+import objects.Home;
+import objects.Vehicle;
 import users.*;
 import policy.*;
 import quotes.*;
 import java.time.LocalDate;
+
+
+// TODO: Class not setup for all recent changes
+
 
 /**
  * This class tests the functionality of the Capstone Project.
@@ -28,9 +34,9 @@ public class FunWithCapstone {
         System.out.println("\n===== TESTS COMPLETED =====");
     }
 
-    // Home Quote Generation
+    // Objects.Home Quote Generation
     private static void testHomeQuoteCreation() {
-        System.out.println("\n[Test] Home Quote Creation");
+        System.out.println("\n[Test] Objects.Home Quote Creation");
         Customer customer = new Customer(1, "John Jones", "john.jones@gmail.com");
         HomeQuote homeQuote = new HomeQuote(101, 0, 350000, 1.25, 1.25, 1.0);
         homeQuote.generateQuote(customer);
@@ -46,29 +52,28 @@ public class FunWithCapstone {
         System.out.println("Actual: " + autoQuote);
     }
 
-    // Paying for a Quote and Converting to a Policy
+    // Paying for a Quote and Converting to a Policy (Updated)
     private static void testQuotePaymentAndPolicyCreation() {
         System.out.println("\n[Test] Quote Payment & Policy Creation");
         Customer customer = new Customer(3, "Michael Johnson", "michael.johnson@gmail.com");
-        Quote homeQuote = new HomeQuote(201, 0, 350000, 1.1, 1.2, 1.0);
-        homeQuote.generateQuote(customer);
-        homeQuote.payForQuote();
-        Policy homePolicy = new Policy("H-001", homeQuote, "Home", homeQuote.getPaymentDate());
-        customer.addPolicy(customer,homePolicy);
+        Home home = new Home("456 Oak St", 2000, 350000);
+        Quote homeQuote = QuoteFactory.createHomeQuote(201, home, 0);
+
+        System.out.println("Generated: " + homeQuote);
+        customer.makePayment(LocalDate.now());
+
+        Policy homePolicy = new Policy("H-001", homeQuote, "Home");
+        customer.addPolicy(homePolicy);
         customer.displayUserInfo();
     }
 
     // Handling Expired Quotes
     private static void testQuoteExpirationHandling() {
         System.out.println("\n[Test] Quote Expiration Handling");
-        Quote expiredQuote = new HomeQuote(202, 0, 250000, 1.0, 1.2, 1.0);
+        Home home = new Home("789 Pine St", 2010, 250000);
+        Quote expiredQuote = QuoteFactory.createHomeQuote(202, home, 0);
         expiredQuote.setExpiryDate(LocalDate.now().minusDays(31));
         System.out.println("Expired Quote: Expiry Date - " + expiredQuote.getExpiryDate());
-        try {
-            expiredQuote.payForQuote();
-        } catch (IllegalStateException e) {
-            System.out.println("Expected Error: " + e.getMessage());
-        }
     }
 
     // Customer Creation
@@ -98,31 +103,22 @@ public class FunWithCapstone {
         System.out.println("\n[Test] Home & Auto Policy Discounts");
 
         Customer customer = new Customer(10, "Ethan Smith", "ethan.smith@gmail.com");
+        Home home = new Home("123 Elm St", 2005, 400000);
+        Vehicle vehicle = new Vehicle("Honda", "Civic", 2018, "VIN987654");
 
-        // Home policy
-        HomeQuote homeQuote = new HomeQuote(1001, 0, 400000, 1.2, 1.1, 1.0);
-        homeQuote.generateQuote(customer);
-        double homeOriginalPrice = homeQuote.getQuotePrice(); // Store price before discount
-        homeQuote.payForQuote();
-        System.out.println("Final Home Quote Price (Stored in Policy): $" + homeQuote.getQuotePrice());
-        Policy homePolicy = new Policy("H-1001", homeQuote, "Home", homeQuote.getPaymentDate());
-        customer.addPolicy(customer, homePolicy);
+        Quote homeQuote = QuoteFactory.createHomeQuote(1001, home, 0);
+        Quote autoQuote = QuoteFactory.createAutoQuote(1002, vehicle, 0);
 
-        // Auto policy
-        AutoQuote autoQuote = new AutoQuote(1002, 0, 30, 0, 5, 20000);
-        autoQuote.generateQuote(customer);
-        double autoOriginalPrice = autoQuote.getQuotePrice(); // Store price before discount
-        autoQuote.payForQuote();
-        System.out.println("Final Auto Quote Price (Stored in Policy): $" + autoQuote.getQuotePrice());
-        Policy autoPolicy = new Policy("A-1002", autoQuote, "Auto", autoQuote.getPaymentDate());
-        customer.addPolicy(customer, autoPolicy);
+        System.out.println("Generated Home Quote: " + homeQuote);
+        System.out.println("Generated Auto Quote: " + autoQuote);
 
-        System.out.println("\nExpected: 10% discount applied to both policies.");
-        System.out.println("Comparison:");
-        System.out.println("  Home Quote Before Discount: $" + homeOriginalPrice);
-        System.out.println("  Home Quote After Discount: $" + homeQuote.getQuotePrice());
-        System.out.println("  Auto Quote Before Discount: $" + autoOriginalPrice);
-        System.out.println("  Auto Quote After Discount: $" + autoQuote.getQuotePrice());
+        customer.makePayment(LocalDate.now());
+
+        Policy homePolicy = new Policy("H-1001", homeQuote, "Home");
+        Policy autoPolicy = new Policy("A-1002", autoQuote, "Auto");
+
+        customer.addPolicy(homePolicy);
+        customer.addPolicy(autoPolicy);
         customer.displayUserInfo();
     }
 
@@ -132,33 +128,42 @@ public class FunWithCapstone {
 
         Customer customer = new Customer(11, "Sophia Smith", "sophia.smith@gmail.com");
 
-        AutoQuote firstCar = new AutoQuote(2001, 0, 28, 0, 3, 25000);
-        firstCar.generateQuote(customer);
-        firstCar.payForQuote();
-        Policy firstCarPolicy = new Policy("A-2001", firstCar, "Auto", firstCar.getPaymentDate());
-        customer.addPolicy(customer, firstCarPolicy);
+        Vehicle firstCar = new Vehicle("Ford", "Focus", 2017, "VIN1234");
+        Vehicle secondCar = new Vehicle("Chevrolet", "Malibu", 2015, "VIN5678");
 
-        AutoQuote secondCar = new AutoQuote(2002, 0, 40, 1, 8, 18000);
-        secondCar.generateQuote(customer);
-        secondCar.payForQuote();
-        Policy secondCarPolicy = new Policy("A-2002", secondCar, "Auto", secondCar.getPaymentDate());
-        customer.addPolicy(customer, secondCarPolicy);
+        Quote firstCarQuote = QuoteFactory.createAutoQuote(2001, firstCar, 0);
+        Quote secondCarQuote = QuoteFactory.createAutoQuote(2002, secondCar, 0);
+
+        System.out.println("Generated Auto Quotes:");
+        System.out.println("  - First Car: " + firstCarQuote);
+        System.out.println("  - Second Car: " + secondCarQuote);
+
+        // Process payment once before adding policies
+        customer.makePayment(LocalDate.now());
+
+        Policy firstCarPolicy = new Policy("A-2001", firstCarQuote, "Auto");
+        Policy secondCarPolicy = new Policy("A-2002", secondCarQuote, "Auto");
+
+        customer.addPolicy(firstCarPolicy);
+        customer.addPolicy(secondCarPolicy);
 
         System.out.println("Expected: Customer with two active auto policies.");
         customer.displayUserInfo();
     }
 
+
     // Exceeding Auto Policy Limit
     private static void testExceedingAutoPolicyLimits() {
         System.out.println("\n[Test] Exceeding Auto Policy Limits");
         Customer customer = new Customer(6, "Laura Smith", "laura.smith@gmail.com");
+
         try {
-            for (int i = 1; i <= 4; i++) {
-                AutoQuote autoQuote = new AutoQuote(500 + i, 0, 30, 0, 5, 25000);
-                autoQuote.generateQuote(customer);
-                autoQuote.payForQuote();
-                Policy autoPolicy = new Policy("A-500" + i, autoQuote, "Auto", autoQuote.getPaymentDate());
-                customer.addPolicy(customer, autoPolicy);
+            for (int i = 1; i <= 3; i++) {
+                Vehicle vehicle = new Vehicle("Ford", "Fusion", 2012 + i, "VIN500" + i);
+                Quote autoQuote = QuoteFactory.createAutoQuote(500 + i, vehicle, 0);
+                customer.makePayment(LocalDate.now());
+                Policy autoPolicy = new Policy("A-500" + i, autoQuote, "Auto");
+                customer.addPolicy(autoPolicy);
             }
         } catch (Exception e) {
             System.out.println("Expected Error: " + e.getMessage());
@@ -169,13 +174,14 @@ public class FunWithCapstone {
     private static void testExceedingHomePolicyLimits() {
         System.out.println("\n[Test] Exceeding Home Policy Limits");
         Customer customer = new Customer(7, "Ian Somerton", "ian.somerton@gmail.com");
+
         try {
-            for (int i = 1; i <= 3; i++) {
-                HomeQuote homeQuote = new HomeQuote(1001, 0, 400000, 1.2, 1.1, 1.0);
-                homeQuote.generateQuote(customer);
-                homeQuote.payForQuote();
-                Policy homePolicy = new Policy("A-1001", homeQuote, "Home", homeQuote.getPaymentDate());
-                customer.addPolicy(customer, homePolicy);
+            for (int i = 1; i <= 2; i++) { // Only 1 home policy allowed
+                Home home = new Home("789 Maple St", 1990 + i, 500000);
+                Quote homeQuote = QuoteFactory.createHomeQuote(1001, home, 0);
+                customer.makePayment(LocalDate.now());
+                Policy homePolicy = new Policy("H-1001", homeQuote, "Home");
+                customer.addPolicy(homePolicy);
             }
         } catch (Exception e) {
             System.out.println("Expected Error: " + e.getMessage());
@@ -204,26 +210,26 @@ public class FunWithCapstone {
         System.out.println("Mid-Risk Driver Quote: " + midRiskQuote);
     }
 
-    // Test: Home Quote Variations
+    // Test: Objects.Home Quote Variations
     private static void testHomeQuoteVariations() {
-        System.out.println("\n[Test] Home Quote Variations");
+        System.out.println("\n[Test] Objects.Home Quote Variations");
 
         Customer customer = new Customer(13, "Emma Smith", "emma.smith@gmail.com");
 
         // Case 1: Small home, low risk factors
         HomeQuote smallHome = new HomeQuote(4001, 0, 200000, 1.0, 1.0, 1.0);
         smallHome.generateQuote(customer);
-        System.out.println("Small Home Quote: " + smallHome);
+        System.out.println("Small Objects.Home Quote: " + smallHome);
 
         // Case 2: Large home, moderate risk factors
         HomeQuote largeHome = new HomeQuote(4002, 0, 600000, 1.2, 1.2, 1.2);
         largeHome.generateQuote(customer);
-        System.out.println("Large Home Quote: " + largeHome);
+        System.out.println("Large Objects.Home Quote: " + largeHome);
 
         // Case 3: High-value home, high-risk location
         HomeQuote highRiskHome = new HomeQuote(4003, 0, 1000000, 1.5, 1.5, 1.8);
         highRiskHome.generateQuote(customer);
-        System.out.println("High-Risk Home Quote: " + highRiskHome);
+        System.out.println("High-Risk Objects.Home Quote: " + highRiskHome);
     }
 
     // Invalid Cases & Edge Cases
