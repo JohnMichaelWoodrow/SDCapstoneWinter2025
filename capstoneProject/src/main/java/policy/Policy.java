@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 public class Policy {
     private final String policyNumber;
-    private final Quote quote;
+    private final int quoteId;
     private final String policyType;
     private final LocalDate startDate;
     private LocalDate endDate;
@@ -18,13 +18,9 @@ public class Policy {
     /**
      * Constructs a Policy from a paid Quote.
      */
-    public Policy(String policyNumber, Quote quote, String policyType) {
-        if (!quote.isPaid()) {
-            throw new IllegalStateException("Quote must be paid before creating a Policy.");
-        }
-
+    public Policy(String policyNumber, int quoteId, String policyType) {
         this.policyNumber = policyNumber;
-        this.quote = quote;
+        this.quoteId = quoteId;
         this.policyType = policyType;
         this.startDate = LocalDate.now();
         this.endDate = startDate.plusYears(1);
@@ -36,8 +32,8 @@ public class Policy {
         return policyNumber;
     }
 
-    public Quote getQuote() {
-        return quote;
+    public int getQuoteId() {
+        return quoteId;
     }
 
     public String getPolicyType() {
@@ -101,6 +97,6 @@ public class Policy {
         return "Policy Number: " + policyNumber + "\nType: " + policyType +
                 "\nStatus: " + status + "\nStart Date: " + startDate +
                 "\nEnd Date: " + endDate + "\nPaid: " + isPaid +
-                "\nQuote: " + quote;
+                "\nQuote: " + quoteId;
     }
 }

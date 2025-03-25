@@ -27,7 +27,7 @@ public class PolicyFactory {
             throw new IllegalStateException("Customer has reached active auto policy limit.");
         }
 
-        Policy policy = new Policy("P-" + (customer.getPolicies().size() + 1), quote, policyType);
+        Policy policy = new Policy("P-" + (customer.getPolicies().size() + 1), quote.getQuoteId(), policyType);
         customer.getPolicies().add(policy);
         customer.getPaidQuotes().remove(quote);
         return policy;

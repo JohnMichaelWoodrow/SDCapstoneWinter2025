@@ -1,3 +1,130 @@
+import objects.Home;
+import objects.Vehicle;
+import users.*;
+import policy.*;
+import quotes.*;
+
+public class FunWithCapstone {
+    public static void main(String[] args) {
+        System.out.println("===== CAPSTONE TESTS =====");
+
+        testHomeQuoteCreation();
+        testAutoQuoteCreation();
+        testQuotePaymentAndPolicyCreation();
+        testQuoteExpirationHandling();
+        testCustomerPolicyLimits();
+        testAgentCreation();
+        testAgentCustomerInteraction();
+
+        System.out.println("\n===== TESTS COMPLETED =====");
+    }
+
+    private static void testHomeQuoteCreation() {
+        System.out.println("\n[Test] Home Quote Creation");
+        Customer customer = new Customer(1, "John Jones", "john.jones@gmail.com");
+        Home home = new Home("123 Main St", 2005, 350000);
+        Quote homeQuote = customer.requestHomeQuote(home);
+
+        System.out.println("Generated: " + homeQuote);
+    }
+
+    private static void testAutoQuoteCreation() {
+        System.out.println("\n[Test] Auto Quote Creation");
+        Customer customer = new Customer(2, "Alice Smith", "alice.smith@example.com");
+        Vehicle vehicle = new Vehicle("Toyota", "Camry", 2020, "VIN12345");
+        Quote autoQuote = customer.requestAutoQuote(vehicle, 30, 0);
+
+        System.out.println("Generated: " + autoQuote);
+    }
+
+    private static void testQuotePaymentAndPolicyCreation() {
+        System.out.println("\n[Test] Quote Payment & Policy Creation");
+        Customer customer = new Customer(3, "Michael Johnson", "michael.johnson@gmail.com");
+        Home home = new Home("456 Oak St", 2000, 350000);
+        Quote homeQuote = customer.requestHomeQuote(home);
+
+        customer.makePayment(homeQuote);
+        Policy homePolicy = customer.createPolicyFromQuote(homeQuote);
+
+        System.out.println("Created Policy: " + homePolicy);
+        customer.displayUserInfo();
+    }
+
+    private static void testQuoteExpirationHandling() {
+        System.out.println("\n[Test] Quote Expiration Handling");
+        Customer customer = new Customer(4, "Lisa Green", "lisa.green@gmail.com");
+        Home home = new Home("789 Pine St", 2010, 250000);
+        Quote expiredQuote = customer.requestHomeQuote(home);
+
+        // Simulate expiration
+        expiredQuote = new Quote(expiredQuote.getQuoteId(), expiredQuote.getQuoteType(), expiredQuote.getQuotePrice()) {
+            @Override
+            public boolean isExpired() {
+                return true;
+            }
+        };
+
+        try {
+            customer.makePayment(expiredQuote);
+        } catch (Exception e) {
+            System.out.println("Expected Error: " + e.getMessage());
+        }
+    }
+
+    private static void testCustomerPolicyLimits() {
+        System.out.println("\n[Test] Enforcing Policy Limits");
+
+        Customer customer = new Customer(5, "Laura Smith", "laura.smith@gmail.com");
+        Home home = new Home("789 Maple St", 1990, 500000);
+        Vehicle vehicle1 = new Vehicle("Ford", "Fusion", 2017, "VIN12345");
+        Vehicle vehicle2 = new Vehicle("Chevrolet", "Malibu", 2018, "VIN67890");
+
+        // Request Quotes
+        Quote homeQuote = customer.requestHomeQuote(home);
+        Quote autoQuote1 = customer.requestAutoQuote(vehicle1, 28, 1);
+        Quote autoQuote2 = customer.requestAutoQuote(vehicle2, 30, 0);
+
+        // Make payments
+        customer.makePayment(homeQuote);
+        customer.makePayment(autoQuote1);
+        customer.makePayment(autoQuote2);
+
+        // Convert to policies
+        customer.createPolicyFromQuote(homeQuote);
+        customer.createPolicyFromQuote(autoQuote1);
+        customer.createPolicyFromQuote(autoQuote2);
+
+        // Try to exceed policy limits
+        try {
+            Vehicle extraVehicle = new Vehicle("Honda", "Civic", 2021, "VIN99999");
+            Quote extraAutoQuote = customer.requestAutoQuote(extraVehicle, 25, 0);
+            customer.makePayment(extraAutoQuote);
+            customer.createPolicyFromQuote(extraAutoQuote);
+        } catch (Exception e) {
+            System.out.println("Expected Error: " + e.getMessage());
+        }
+    }
+
+    private static void testAgentCreation() {
+        System.out.println("\n[Test] Agent Creation");
+        Agent agent = new Agent(99, "Will Smith", "will.smith@insurance.com", "Senior Agent");
+        agent.displayUserInfo();
+    }
+
+    private static void testAgentCustomerInteraction() {
+        System.out.println("\n[Test] Agent Customer Interaction");
+        Customer customer = new Customer(6, "Alice Smith", "alice.smith@example.com");
+        Agent agent = new Agent(100, "Sarah Smith", "sarah.smith@insurance.com", "Junior Agent");
+        agent.viewCustomerInfo(customer);
+    }
+}
+
+
+
+/**
+ * Below is the previous tester class, the above is the temporary tester for now
+ */
+
 //import objects.Home;
 //import objects.Vehicle;
 //import users.*;
