@@ -16,7 +16,7 @@ public abstract class User {
     public User(int id, String name, String email) {
         this.id = id;
         this.name = name;
-        if(isValidEmail(email)) {
+        if(!isValidEmail(email)) {
             throw new IllegalArgumentException("Invalid email address: " + email);
         } else
             this.email = email;
@@ -42,7 +42,7 @@ public abstract class User {
 
     public boolean isValidEmail(String email) {
         Matcher matcher = EMAIL_PATTERN.matcher(email);
-        return !matcher.matches();
+        return matcher.matches();
     }
 
     public String getEmail() {
@@ -50,7 +50,7 @@ public abstract class User {
     }
 
     public void setEmail(String email) {
-        if (isValidEmail(email)) {
+        if (!isValidEmail(email)) {
             throw new IllegalArgumentException("Invalid email format");
         }
         this.email = email;

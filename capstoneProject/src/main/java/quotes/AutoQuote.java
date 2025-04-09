@@ -1,55 +1,30 @@
 package quotes;
-
-import users.Customer;
-import java.time.LocalDate;
-import java.util.Date;
+import objects.Vehicle;
 
 /**
  * Represents a AutoQuote in the insurance system.
  */
-
 public class AutoQuote extends Quote {
-    private int driverAge;
-    private int accidentCount;
-    private int vehicleAge;
-    private double carValue;
+    private final int driverAge;
+    private final int accidentCount;
+    private final double vehicleValue;
 
-    public AutoQuote(int quoteId, double quotePrice, int driverAge, int accidentCount, int vehicleAge, double carValue) {
-        super(quoteId, "Auto", quotePrice);
+    public AutoQuote(int quoteId, Vehicle vehicle, int driverAge, int accidentCount, double baseRate) {
+        super(quoteId, "Auto", baseRate * getRiskFactor(driverAge, accidentCount));
         this.driverAge = driverAge;
         this.accidentCount = accidentCount;
-        this.vehicleAge = vehicleAge;
-        this.carValue = carValue;
+        this.vehicleValue = vehicle.getYear();  // Assuming value is based on age
     }
 
-    @Override
-    public void generateQuote(Customer customer) {
+    private static double getRiskFactor(int driverAge, int accidentCount) {
         double ageFactor = (driverAge < 25) ? 2.0 : 1.0;
         double accidentFactor = (accidentCount == 0) ? 1.0 : (accidentCount == 1) ? 1.25 : 2.5;
-        double vehicleAgeFactor = (vehicleAge > 10) ? 2.0 : (vehicleAge > 5) ? 1.5 : 1.0;
-        double originalPrice = 750 * ageFactor * vehicleAgeFactor * accidentFactor;
-        this.quotePrice = originalPrice; // Store original price first
-
-        System.out.println("Original Auto Insurance Quote: $" + originalPrice); // Show price before discount
-        if (customer.hasActiveHomePolicy(customer)) {
-            System.out.println("Applying 10% discount for existing home policy.");
-            this.quotePrice *= 0.9;  // Apply discount
-        }
-        // Ensure the quote price is properly stored
-        setQuotePrice(this.quotePrice);
-        System.out.println("Final Auto Insurance Quote: $" + this.quotePrice);
-    }
-
-
-
-
-    @Override
-    public void expireQuote() {
-        System.out.println("Auto Quote with ID " + quoteId + " has expired.");
+        return ageFactor * accidentFactor;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (Driver Age: " + driverAge + ", Accidents: " + accidentCount + ")";
+        return super.toString() + "\nDriver Age: " + driverAge + "\nAccident Count: " + accidentCount;
     }
 }
+
