@@ -1,3 +1,7 @@
+<%@ page import="java.net.URL" %>
+<%@ page import="java.net.URLConnection" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.InputStreamReader" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -27,11 +31,13 @@
             <h3>Create an account to get started!</h3>
             <a id="createAccountbtn" href="login.jsp">Create Account</a>
         </div>
+
+        <!-- This div will display the user data -->
+        <div id="userInfo"></div>
     </div>
+
+    <a href="user">Get Users</a>
 </div>
-<%--<footer>--%>
-<%--    <h2>foot</h2>--%>
-<%--</footer>--%>
 
 </body>
 <footer>

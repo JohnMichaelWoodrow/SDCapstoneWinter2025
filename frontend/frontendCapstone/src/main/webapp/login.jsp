@@ -21,15 +21,17 @@
 
     <div id="pagemaindiv">
         <div id="loginregdiv">
-            <form id="loginform" action="quote.jsp">
+            <form id="loginform" method="POST" action="login">
                 <h2>Login</h2>
                 <label for="logemail">Email: </label>
-                <input class="logininput" type="text" value="JoshTaylor@taylorinsurance.ca" id="logemail"><br>
+                <input class="logininput" type="text" id="logemail"><br>
                 <label for="logpassword">Password: </label>
                 <input class="logininput" type="password" id="logpassword"><br>
                 <button class="loginregbtn" type="submit">Login</button>
             </form>
+
             <h2>Or</h2>
+
             <form id="registerform" action="quote.jsp">
                 <h2>Register</h2>
                 <label for="fname">First Name: </label>
