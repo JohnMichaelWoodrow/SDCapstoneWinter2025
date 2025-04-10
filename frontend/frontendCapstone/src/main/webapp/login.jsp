@@ -24,11 +24,16 @@
             <form id="loginform" method="POST" action="login">
                 <h2>Login</h2>
                 <label for="logemail">Email: </label>
-                <input class="logininput" type="text" id="logemail"><br>
+                <input class="logininput" type="text" id="logemail"  name="email"><br>
                 <label for="logpassword">Password: </label>
                 <input class="logininput" type="password" id="logpassword"><br>
                 <button class="loginregbtn" type="submit">Login</button>
             </form>
+
+            <% String error = (String) request.getAttribute("error"); %>
+            <% if (error != null) { %>
+            <div style="color:red;"><%= error %></div>
+            <% } %>
 
             <h2>Or</h2>
 

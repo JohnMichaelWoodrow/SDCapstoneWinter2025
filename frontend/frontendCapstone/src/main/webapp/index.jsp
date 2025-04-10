@@ -37,6 +37,7 @@
     </div>
 
     <a href="user">Get Users</a>
+    <a href="customer">Get Customers</a>
 </div>
 
 </body>

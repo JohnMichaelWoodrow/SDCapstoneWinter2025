@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -15,27 +16,39 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String email = request.getParameter("email");
-//        String password = request.getParameter("password");
+        String password = request.getParameter("password");
+
+        System.out.println("Looking for: " + email);
 
         ApiClient apiClient = new ApiClient();
-        String jsonResponse = null; // this method will call your API
+        String jsonResponse = apiClient.getAllUsers(); // TODO currently getting user role cus customer is broken
 
-//        try {
-////            jsonResponse = apiClient.loginUser(email);
-//        } catch (JSONException e) {
-//            throw new RuntimeException(e);
-//        }
+        System.out.println("Raw API response:");
+        System.out.println(jsonResponse);
 
-        // You'll likely want to parse the response
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(jsonResponse);
 
-        if (root.get("success").asBoolean()) {
-            long userId = root.get("user").get("id").asLong();
+        boolean found = false;
+        long userId = 0;
+
+        for (JsonNode user : root) {
+            if (user.has("role") && user.get("role").asText().equalsIgnoreCase(email)) { // TODO change role back to email
+                found = true;
+                userId = user.get("id").asLong();
+
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", userId);
+
+                break;
+            }
+        }
+
+        if (found) {
             request.getSession().setAttribute("userId", userId);
-            response.sendRedirect("quote.jsp"); // or wherever you want to go
+            response.sendRedirect("quote.jsp");
         } else {
-            request.setAttribute("error", "Invalid email or password");
+            request.setAttribute("error", "Email not found. Please register.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
