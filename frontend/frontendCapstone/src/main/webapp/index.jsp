@@ -28,8 +28,8 @@
         <h2>Welcome!</h2>
         <p>We take pride in having the best coverage for you and your family.</p>
         <div id="createAccountLink">
-            <h3>Create an account to get started!</h3>
-            <a id="createAccountbtn" href="login.jsp">Create Account</a>
+            <h3>Get a Quote now!</h3>
+            <a id="createAccountbtn" href="login.jsp">Get A Quote!</a>
         </div>
 
         <!-- This div will display the user data -->

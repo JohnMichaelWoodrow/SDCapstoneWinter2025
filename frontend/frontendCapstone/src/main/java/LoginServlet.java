@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", userId);
+                // TODO set name as session variable to use on quote page and elsewhere
 
                 break;
             }

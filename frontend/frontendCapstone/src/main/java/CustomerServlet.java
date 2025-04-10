@@ -10,7 +10,7 @@ import java.io.IOException;
 public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ApiClient apiClient = new ApiClient();
-        String json = apiClient.getAllCustomers(); // no userId
+        String json = apiClient.getAllCustomers();
         response.setContentType("application/json");
         response.getWriter().write(json);
     }

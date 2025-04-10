@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+        <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
@@ -32,7 +32,14 @@
     </div>
 
     <div class="pagemaindiv">
-        <h2>Happy Thursday Josh!</h2>
+        <%
+            Long userName = (Long) session.getAttribute("userId");
+            String user = null;
+            if (userName != null) {
+                user = String.valueOf(userId);
+            }
+        %>
+        <h2>Happy Thursday <%=user%></h2>
         <div id="getAQuoteDiv">
             <form class="getAQuoteForm" action="quoteSummary.jsp">
                 <h2 class="getAQuoteHeader">Get a Auto Quote</h2>
