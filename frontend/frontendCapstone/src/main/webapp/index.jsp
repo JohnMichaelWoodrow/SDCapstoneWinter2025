@@ -31,12 +31,9 @@
             <h3>Get a Quote now!</h3>
             <a id="createAccountbtn" href="login.jsp">Get A Quote!</a>
         </div>
-
-        <!-- This div will display the user data -->
-        <div id="userInfo"></div>
     </div>
 
-    <a href="user">Get Users</a>
+    <a href="user">Get Users</a> <%-- Test api calls --%>
     <a href="customer">Get Customers</a>
 </div>
 

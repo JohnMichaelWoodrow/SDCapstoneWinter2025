@@ -24,9 +24,9 @@
             <form id="loginform" method="POST" action="login">
                 <h2>Login</h2>
                 <label for="logemail">Email: </label>
-                <input class="logininput" type="text" id="logemail"  name="email"><br>
+                <input class="logininput" type="text" id="logemail" name="email"><br>
                 <label for="logpassword">Password: </label>
-                <input class="logininput" type="password" id="logpassword"><br>
+                <input class="logininput" type="password" id="logpassword" name="password"><br>
                 <button class="loginregbtn" type="submit">Login</button>
             </form>
 

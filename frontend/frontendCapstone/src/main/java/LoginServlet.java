@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         System.out.println("Looking for: " + email);
 
         ApiClient apiClient = new ApiClient();
-        String jsonResponse = apiClient.getAllUsers(); // TODO currently getting user role cus customer is broken
+        String jsonResponse = apiClient.getAllCustomers();
 
         System.out.println("Raw API response:");
         System.out.println(jsonResponse);
@@ -30,15 +30,17 @@ public class LoginServlet extends HttpServlet {
 
         boolean found = false;
         long userId = 0;
+        String username = null;
 
         for (JsonNode user : root) {
-            if (user.has("role") && user.get("role").asText().equalsIgnoreCase(email)) { // TODO change role back to email
+            if (user.has("email") && user.get("email").asText().equalsIgnoreCase(email)) { // TODO needs to also check password
                 found = true;
                 userId = user.get("id").asLong();
+                username = user.get("name").toString();
 
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", userId);
-                // TODO set name as session variable to use on quote page and elsewhere
+                session.setAttribute("name", username);
 
                 break;
             }
