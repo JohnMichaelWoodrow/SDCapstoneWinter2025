@@ -1,4 +1,4 @@
-        <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
@@ -41,28 +41,45 @@
         %>
         <h2>Happy Thursday <%=user%></h2>
         <div id="getAQuoteDiv">
-            <form class="getAQuoteForm" action="quoteSummary.jsp">
-                <h2 class="getAQuoteHeader">Get a Auto Quote</h2>
+
+            <form class="getAQuoteForm" action="get-quote" method="POST">
+                <h2 class="getAQuoteHeader">Get an Auto Quote</h2>
+
                 <label for="driverAge">Driver DOB: </label>
-                <input class="quoteInput" type="date" id="driverAge"><br>
+                <input class="quoteInput" type="date" id="driverAge" name="driverAge"><br>
+
                 <label for="accidentCount">Accident Count: </label>
-                <input class="quoteInput" type="number" id="accidentCount"><br>
+                <input class="quoteInput" type="number" id="accidentCount" name="accidentCount"><br>
+
                 <label for="vehicleAge">Vehicle Year: </label>
-                <input class="quoteInput" type="number" id="vehicleAge"><br>
+                <input class="quoteInput" type="number" id="vehicleAge" name="vehicleYear"><br>
+
                 <label for="vehicleValue">Vehicle Value: </label>
-                <input class="quoteInput" type="text" id="vehicleValue"><br>
-                <button class="calculateQuoteBtn">Calculate</button>
+                <input class="quoteInput" type="text" id="vehicleValue" name="vehicleValue"><br>
+
+                <button class="calculateQuoteBtn" type="submit">Calculate</button>
             </form>
 
-            <form class="getAQuoteForm">
+            <form class="getAQuoteForm" action="get-home-quote" method="POST">
                 <h2 class="getAQuoteHeader">Get a Home Quote</h2>
+
                 <label for="homeValue">Home Value: </label>
-                <input class="quoteInput" type="text" id="homeValue"><br>
+                <input class="quoteInput" type="text" id="homeValue" name="homeValue"><br>
+
                 <label for="location">Home Location: </label>
-                <input class="quoteInput" type="text" id="location"><br>
+                <input class="quoteInput" type="text" id="location" name="location"><br>
+
                 <label for="age">Year Built: </label>
-                <input class="quoteInput" type="number" id="age"><br>
-                <button class="calculateQuoteBtn">Calculate</button>
+                <input class="quoteInput" type="number" id="age" name="yearBuilt"><br>
+
+                <label for="heatingType">Heating Type: </label>
+                <select class="quoteInput" id="heatingType" name="heatingType">
+                    <option value="oil">Oil</option>
+                    <option value="wood">Wood</option>
+                    <option value="other">Other</option>
+                </select><br>
+
+                <button class="calculateQuoteBtn" type="submit">Calculate</button>
             </form>
         </div>
     </div>
