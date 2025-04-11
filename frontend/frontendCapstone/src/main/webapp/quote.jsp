@@ -33,10 +33,10 @@
 
     <div class="pagemaindiv">
         <%
-            Long userName = (Long) session.getAttribute("userId");
+            String userName = (String) session.getAttribute("name");
             String user = null;
             if (userName != null) {
-                user = String.valueOf(userId);
+                user = userName;
             }
         %>
         <h2>Happy Thursday <%=user%></h2>
