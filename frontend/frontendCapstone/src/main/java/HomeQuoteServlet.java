@@ -88,6 +88,9 @@ public class HomeQuoteServlet extends HttpServlet {
 
         quoteConn.disconnect();
 
+        HttpSession session = request.getSession();
+        session.setAttribute("quoteType", "home");
+
         request.setAttribute("quote", result.toString());
         request.getRequestDispatcher("quoteSummary.jsp").forward(request, response);
     }

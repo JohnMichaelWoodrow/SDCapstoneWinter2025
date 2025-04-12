@@ -87,6 +87,10 @@ public class quoteServlet extends HttpServlet {
         }
 
         quoteConn.disconnect();
+
+        HttpSession session = request.getSession();
+        session.setAttribute("quoteType", "vehicle");
+
         request.setAttribute("quote", result.toString());
         request.getRequestDispatcher("quoteSummary.jsp").forward(request, response);
     }

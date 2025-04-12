@@ -1,5 +1,16 @@
 <%@ page import="org.json.JSONObject" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    String quoteTypeVariable = (String) session.getAttribute("quoteType");
+    if (quoteTypeVariable == null) {
+        response.sendRedirect("quote.jsp");
+        return;
+    }
+%>
 <html>
 <head>
     <title>Quote Summary</title>
@@ -34,6 +45,7 @@
                 String quoteType = quote.getString("quoteType");
 
                 String summaryTable = "";
+                String quoteId = "";
 
                 if (quoteType.equalsIgnoreCase("Auto")) {
                     JSONObject vehicle = quote.getJSONObject("vehicle");
@@ -42,6 +54,8 @@
                     String model = vehicle.getString("model");
                     int year = vehicle.getInt("year");
                     String vin = vehicle.getString("vin");
+
+                    quoteId = String.valueOf(quote.getInt("id"));
 
                     summaryTable += "<tr><th>Quote Type:</th><td>Auto</td></tr>";
                     summaryTable += "<tr><th>Vehicle:</th><td>" + make + " " + model + " (" + year + ")</td></tr>";
@@ -57,6 +71,8 @@
                     String location = home.getString("location");
                     double liabilityLimit = home.getDouble("liabilityLimit");
 
+                    quoteId = String.valueOf(quote.getInt("id"));
+
                     summaryTable += "<tr><th>Quote Type:</th><td>Home</td></tr>";
                     summaryTable += "<tr><th>Address:</th><td>" + address + "</td></tr>";
                     summaryTable += "<tr><th>Year Built:</th><td>" + yearBuilt + "</td></tr>";
@@ -66,6 +82,8 @@
                     summaryTable += "<tr><th>Location:</th><td>" + location + "</td></tr>";
                     summaryTable += "<tr><th>Liability Limit:</th><td>$" + liabilityLimit + "</td></tr>";
                 }
+
+                Long userId = (Long) session.getAttribute("userId");
         %>
 
         <table id="quoteSummaryTable">
@@ -86,7 +104,12 @@
         </table>
 
         <div id="quoteActionDiv">
-            <button class="quoteActionBtn">Purchase</button>
+            <form id="purchaseForm" method="POST" action="purchase">
+
+                <input class="purchaseInput" type="hidden" id="id" name="id" value="<%= quoteId %>"><br>
+                <input class="purchaseInput" type="hidden" id="userId" name="userId" value="<%= userId %>"><br>
+                <button class="loginregbtn" type="submit">Purchase</button>
+            </form>
             <button class="quoteActionBtn" onclick="window.location.href='quote.jsp'">Cancel</button>
         </div>
 

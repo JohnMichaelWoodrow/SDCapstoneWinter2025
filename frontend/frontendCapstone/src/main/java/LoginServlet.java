@@ -17,13 +17,8 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        System.out.println("Looking for: " + email);
-
         ApiClient apiClient = new ApiClient();
         String jsonResponse = apiClient.getAllCustomers();
-
-        System.out.println("Raw API response:");
-        System.out.println(jsonResponse);
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(jsonResponse);
