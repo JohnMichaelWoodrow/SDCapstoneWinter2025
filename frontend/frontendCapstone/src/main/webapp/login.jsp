@@ -37,30 +37,39 @@
 
             <h2>Or</h2>
 
-            <form id="registerform" action="quote.jsp">
+            <form id="registerform" method="POST" action="register">
                 <h2>Register</h2>
                 <label for="fname">First Name: </label>
-                <input class="logininput" type="text" id="fname"><br>
+                <input class="logininput" type="text" id="fname" name="fname"><br>
+
                 <label for="lname">Last Name: </label>
-                <input class="logininput" type="text" id="lname"><br>
+                <input class="logininput" type="text" id="lname" name="lname"><br>
+
                 <label for="regemail">Email: </label>
-                <input class="logininput" type="text" id="regemail"><br>
-                <label for="address">Address: </label>
-                <input class="logininput" type="text" id="address"><br>
-                <label for="city">City: </label>
-                <input class="logininput" type="text" id="city"><br>
-                <label for="provinceState">Province/State: </label>
-                <input class="logininput" type="text" id="provinceState"><br>
+                <input class="logininput" type="text" id="regemail" name="regemail"><br>
+
                 <label for="regpassword">Password: </label>
-                <input class="logininput" type="password" id="regpassword"><br>
+                <input class="logininput" type="password" id="regpassword" name="regpassword"><br>
+
                 <label for="confpassword">Confirm Password: </label>
-                <input class="logininput" type="password" id="confpassword"><br>
+                <input class="logininput" type="password" id="confpassword" name="confpassword"><br>
+
                 <button class="loginregbtn" type="submit">Register</button>
             </form>
+
+            <% String registerError = (String) request.getAttribute("registerError"); %>
+            <% if (registerError != null) { %>
+            <div style="color:red;"><%= registerError %></div>
+            <% } %>
+
+            <% String registerSuccess = (String) request.getAttribute("registerSuccess"); %>
+            <% if (registerSuccess != null) { %>
+            <div style="color:green; font-weight: bold;"><%= registerSuccess %></div>
+            <% } %>
+
         </div>
     </div>
 </div>
-
 
 </body>
 <footer>

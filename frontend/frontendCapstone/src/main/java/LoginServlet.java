@@ -33,7 +33,9 @@ public class LoginServlet extends HttpServlet {
         String username = null;
 
         for (JsonNode user : root) {
-            if (user.has("email") && user.get("email").asText().equalsIgnoreCase(email)) { // TODO needs to also check password
+            if (user.has("email") && user.has("password") &&
+                    user.get("email").asText().equalsIgnoreCase(email) &&
+                    user.get("password").asText().equals(password)) {
                 found = true;
                 userId = user.get("id").asLong();
                 username = user.get("name").toString();
@@ -50,7 +52,7 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("userId", userId);
             response.sendRedirect("quote.jsp");
         } else {
-            request.setAttribute("error", "Email not found. Please register.");
+            request.setAttribute("error", "Email or password is incorrect.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
