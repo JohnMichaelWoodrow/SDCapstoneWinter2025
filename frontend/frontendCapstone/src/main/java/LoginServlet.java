@@ -40,9 +40,13 @@ public class LoginServlet extends HttpServlet {
                 userId = user.get("id").asLong();
                 username = user.get("name").toString();
 
+                JsonNode userNode = user.get("user");
+                String userRole = userNode.get("role").asText();
+
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", userId);
                 session.setAttribute("name", username);
+                session.setAttribute("role", userRole);
 
                 break;
             }
