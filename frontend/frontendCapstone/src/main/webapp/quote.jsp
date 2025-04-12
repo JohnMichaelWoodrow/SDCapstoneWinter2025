@@ -45,42 +45,64 @@
             <form class="getAQuoteForm" action="get-quote" method="POST">
                 <h2 class="getAQuoteHeader">Get an Auto Quote</h2>
 
-                <label for="driverAge">Driver DOB: </label>
-                <input class="quoteInput" type="date" id="driverAge" name="driverAge"><br>
+                <label for="make">Vehicle Make:</label>
+                <input class="quoteInput" type="text" id="make" name="make"><br>
 
-                <label for="accidentCount">Accident Count: </label>
+                <label for="model">Vehicle Model:</label>
+                <input class="quoteInput" type="text" id="model" name="model"><br>
+
+                <label for="year">Vehicle Year:</label>
+                <input class="quoteInput" type="number" id="year" name="year"><br>
+
+                <label for="vin">Vehicle VIN:</label>
+                <input class="quoteInput" type="text" id="vin" name="vin"><br>
+
+                <label for="driverAge">Driver Age:</label>
+                <input class="quoteInput" type="number" id="driverAge" name="driverAge"><br>
+
+                <label for="accidentCount">Accident Count:</label>
                 <input class="quoteInput" type="number" id="accidentCount" name="accidentCount"><br>
-
-                <label for="vehicleAge">Vehicle Year: </label>
-                <input class="quoteInput" type="number" id="vehicleAge" name="vehicleYear"><br>
-
-                <label for="vehicleValue">Vehicle Value: </label>
-                <input class="quoteInput" type="text" id="vehicleValue" name="vehicleValue"><br>
 
                 <button class="calculateQuoteBtn" type="submit">Calculate</button>
             </form>
+
+
+
 
             <form class="getAQuoteForm" action="get-home-quote" method="POST">
                 <h2 class="getAQuoteHeader">Get a Home Quote</h2>
 
+                <label for="address">Address: </label>
+                <input class="quoteInput" type="text" id="address" name="address"><br>
+
+                <label for="yearBuilt">Year Built: </label>
+                <input class="quoteInput" type="number" id="yearBuilt" name="yearBuilt"><br>
+
                 <label for="homeValue">Home Value: </label>
                 <input class="quoteInput" type="text" id="homeValue" name="homeValue"><br>
 
-                <label for="location">Home Location: </label>
-                <input class="quoteInput" type="text" id="location" name="location"><br>
-
-                <label for="age">Year Built: </label>
-                <input class="quoteInput" type="number" id="age" name="yearBuilt"><br>
+                <label for="typeOfDwelling">Type of Dwelling: </label>
+                <input class="quoteInput" type="text" id="typeOfDwelling" name="typeOfDwelling"><br>
 
                 <label for="heatingType">Heating Type: </label>
                 <select class="quoteInput" id="heatingType" name="heatingType">
-                    <option value="oil">Oil</option>
-                    <option value="wood">Wood</option>
-                    <option value="other">Other</option>
+                    <option value="Oil">Oil</option>
+                    <option value="Wood">Wood</option>
+                    <option value="Other">Other</option>
                 </select><br>
+
+                <label for="location">Home Location: </label>
+                <select class="quoteInput" id="location" name="location">
+                    <option value="Urban">Urban</option>
+                    <option value="Rural">Rural</option>
+                </select><br>
+
+                <label for="liabilityLimit">Liability Limit: </label>
+                <input class="quoteInput" type="number" id="liabilityLimit" name="liabilityLimit" step="10000"><br>
 
                 <button class="calculateQuoteBtn" type="submit">Calculate</button>
             </form>
+
         </div>
     </div>
 

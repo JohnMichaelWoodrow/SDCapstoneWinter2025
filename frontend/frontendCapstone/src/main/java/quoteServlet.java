@@ -1,19 +1,12 @@
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.json.JSONException;
-import org.json.JSONObject;
+import jakarta.servlet.http.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.Period;
 
 @WebServlet("/get-quote")
 public class quoteServlet extends HttpServlet {
@@ -21,58 +14,80 @@ public class quoteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            // Collect form data
-            String dobString = request.getParameter("driverAge");
-            String accidentCountStr = request.getParameter("accidentCount");
-            String vehicleYearStr = request.getParameter("vehicleYear");
-            String vehicleValueStr = request.getParameter("vehicleValue");
+        // Collect form data
+        String make = request.getParameter("make");
+        String model = request.getParameter("model");
+        int year = Integer.parseInt(request.getParameter("year"));
+        String vin = request.getParameter("vin");
 
-            // Convert values
-            LocalDate dob = LocalDate.parse(dobString);
-            int driverAge = Period.between(dob, LocalDate.now()).getYears();
-            int accidentCount = Integer.parseInt(accidentCountStr);
-            int vehicleYear = Integer.parseInt(vehicleYearStr);
-            double vehicleValue = Double.parseDouble(vehicleValueStr);
+        int driverAge = Integer.parseInt(request.getParameter("driverAge"));
+        int accidentCount = Integer.parseInt(request.getParameter("accidentCount"));
 
-            // Build JSON
-            JSONObject json = new JSONObject();
-            json.put("driverAge", driverAge);
-            json.put("accidentCount", accidentCount);
-            json.put("vehicleYear", vehicleYear);
-            json.put("vehicleValue", vehicleValue);
+        // Gets UserID
+        Long customerId = (Long) request.getSession().getAttribute("userId");
 
-            // Send API request
-            URL url = new URL("http://localhost:8080/v1/quote/auto");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setDoOutput(true);
-
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = json.toString().getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-
-            StringBuilder result = new StringBuilder();
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    result.append(line.trim());
-                }
-            }
-
-            conn.disconnect();
-            request.setAttribute("quote", result.toString());
-            request.getRequestDispatcher("quoteSummary.jsp").forward(request, response);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JSON.");
-        } catch (NumberFormatException | java.time.format.DateTimeParseException e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid numeric or date input.");
+        // No UserID gets booted
+        if (customerId == null) {
+            response.sendRedirect("login.jsp");
+            return;
         }
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        // Build JSON object
+        String vehicleJson = mapper.createObjectNode()
+                .put("make", make)
+                .put("model", model)
+                .put("year", year)
+                .put("vin", vin)
+                .toString();
+
+        // Send API request to /v1/vehicle (This creates the vehicle)
+        URL vehicleUrl = new URL("http://localhost:8080/v1/vehicle");
+        HttpURLConnection vehicleConn = (HttpURLConnection) vehicleUrl.openConnection();
+        vehicleConn.setRequestMethod("POST");
+        vehicleConn.setRequestProperty("Content-Type", "application/json");
+        vehicleConn.setDoOutput(true);
+
+        try (OutputStream os = vehicleConn.getOutputStream()) {
+            os.write(vehicleJson.getBytes("utf-8"));
+        }
+
+        // Get new Vehicle ID
+        JsonNode vehicleResponse = mapper.readTree(vehicleConn.getInputStream());
+        int vehicleId = vehicleResponse.get("id").asInt();
+        vehicleConn.disconnect();
+
+        // Build JSON object x2
+        String quoteJson = mapper.createObjectNode()
+                .put("customerId", customerId)
+                .put("vehicleId", vehicleId)
+                .put("driverAge", driverAge)
+                .put("accidentCount", accidentCount)
+                .put("baseRate", 500.0) // fixed base rate
+                .toString();
+
+        // Send API request to /v1/auto_quote (This creates the auto quote)
+        URL quoteUrl = new URL("http://localhost:8080/v1/auto_quote");
+        HttpURLConnection quoteConn = (HttpURLConnection) quoteUrl.openConnection();
+        quoteConn.setRequestMethod("POST");
+        quoteConn.setRequestProperty("Content-Type", "application/json");
+        quoteConn.setDoOutput(true);
+
+        try (OutputStream os = quoteConn.getOutputStream()) {
+            os.write(quoteJson.getBytes("utf-8"));
+        }
+
+        StringBuilder result = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(quoteConn.getInputStream(), "utf-8"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                result.append(line.trim());
+            }
+        }
+
+        quoteConn.disconnect();
+        request.setAttribute("quote", result.toString());
+        request.getRequestDispatcher("quoteSummary.jsp").forward(request, response);
     }
 }

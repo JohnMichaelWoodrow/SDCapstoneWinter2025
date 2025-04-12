@@ -30,28 +30,41 @@
                 JSONObject quote = new JSONObject(quoteJson);
 
                 double price = quote.getDouble("quotePrice");
-                String expiryDate = quote.getString("expiryDate");
+                String expiryDate = quote.optString("expiryDate", "N/A");
                 String quoteType = quote.getString("quoteType");
 
                 String summaryTable = "";
 
                 if (quoteType.equalsIgnoreCase("Auto")) {
                     JSONObject vehicle = quote.getJSONObject("vehicle");
-                    double vehicleValue = vehicle.getDouble("value");
+
+                    String make = vehicle.getString("make");
+                    String model = vehicle.getString("model");
+                    int year = vehicle.getInt("year");
+                    String vin = vehicle.getString("vin");
 
                     summaryTable += "<tr><th>Quote Type:</th><td>Auto</td></tr>";
-                    summaryTable += "<tr><th>Vehicle Value:</th><td>$" + vehicleValue + "</td></tr>";
-
+                    summaryTable += "<tr><th>Vehicle:</th><td>" + make + " " + model + " (" + year + ")</td></tr>";
+                    summaryTable += "<tr><th>VIN:</th><td>" + vin + "</td></tr>";
                 } else if (quoteType.equalsIgnoreCase("Home")) {
                     JSONObject home = quote.getJSONObject("home");
+
+                    String address = home.getString("address");
+                    int yearBuilt = home.getInt("yearBuilt");
                     double homeValue = home.getDouble("homeValue");
+                    String dwelling = home.getString("typeOfDwelling");
                     String heating = home.getString("heatingType");
                     String location = home.getString("location");
+                    double liabilityLimit = home.getDouble("liabilityLimit");
 
                     summaryTable += "<tr><th>Quote Type:</th><td>Home</td></tr>";
+                    summaryTable += "<tr><th>Address:</th><td>" + address + "</td></tr>";
+                    summaryTable += "<tr><th>Year Built:</th><td>" + yearBuilt + "</td></tr>";
                     summaryTable += "<tr><th>Home Value:</th><td>$" + homeValue + "</td></tr>";
-                    summaryTable += "<tr><th>Location:</th><td>" + location + "</td></tr>";
+                    summaryTable += "<tr><th>Type of Dwelling:</th><td>" + dwelling + "</td></tr>";
                     summaryTable += "<tr><th>Heating Type:</th><td>" + heating + "</td></tr>";
+                    summaryTable += "<tr><th>Location:</th><td>" + location + "</td></tr>";
+                    summaryTable += "<tr><th>Liability Limit:</th><td>$" + liabilityLimit + "</td></tr>";
                 }
         %>
 
@@ -77,6 +90,8 @@
             <button class="quoteActionBtn" onclick="window.location.href='quote.jsp'">Cancel</button>
         </div>
 
+        <% } else { %>
+        <p style="color:red;">No quote data found.</p>
         <% } %>
 
     </div>
