@@ -170,7 +170,7 @@ body {
     font-size: 200%;
 }
 
-#yourPlansTable {
+.yourPlansTable {
     border-collapse: collapse;
     margin: 0 auto;
     border: 3px solid darkgray;
@@ -329,4 +329,13 @@ footer h3 {
 
 .purchaseInput {
     visibility: hidden;
+}
+
+.getQuoteBtn {
+    background-color: navy;
+    color: white;
+    cursor: pointer;
+    padding: 2px;
+    font-size: 80%;
+    border-radius: 10px;
 }

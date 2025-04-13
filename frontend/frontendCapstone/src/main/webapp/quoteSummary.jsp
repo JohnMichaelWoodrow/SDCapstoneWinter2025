@@ -110,7 +110,11 @@
                 <input class="purchaseInput" type="hidden" id="userId" name="userId" value="<%= userId %>"><br>
                 <button class="loginregbtn" type="submit">Purchase</button>
             </form>
-            <button class="quoteActionBtn" onclick="window.location.href='quote.jsp'">Cancel</button>
+            <form action="cancelQuote" method="GET">
+                <input class="purchaseInput" type="hidden" name="userId" value="<%= userId %>">
+                <button class="quoteActionBtn" type="submit">Cancel</button>
+            </form>
+<%--            <button class="quoteActionBtn" onclick="window.location.href='quote.jsp'">Cancel</button>--%>
         </div>
 
         <% } else { %>

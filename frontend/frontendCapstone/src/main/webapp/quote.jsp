@@ -109,13 +109,16 @@
     <div class="pagemaindiv">
         <h2>Your Policies</h2>
         <%
-            String quoteJson = (String) request.getAttribute("policies");
+            String policyJson = (String) request.getAttribute("policies");
 
             String summaryTable = "";
+            String quotesTable = "";
 
-            if (quoteJson != null) {
-                JSONObject customer = new JSONObject(quoteJson);
+            if (policyJson != null) {
+                JSONObject customer = new JSONObject(policyJson);
                 JSONArray policies = customer.getJSONArray("policies");
+
+                JSONArray quotes = customer.getJSONArray("quotes");
 
                 summaryTable += "<tr><th class='quoteTableHeader'>Type</th><th class='quoteTableHeader'>Start Date</th><th class='quoteTableHeader'>End Date</th><th class='quoteTableHeader'>Status</th><th class='quoteTableHeader'>Total Premium</th></tr>";
 
@@ -136,10 +139,44 @@
                     summaryTable += "<td class='quoteTableCell'>$" + totalPremium + "</td>";
                     summaryTable += "</tr>";
                 }
+
+                quotesTable += "<tr><th class='quoteTableHeader'>Type</th><th class='quoteTableHeader'>Expires</th><th class='quoteTableHeader'>Price</th><th class='quoteTableHeader'>Purchase</th></tr>";
+
+                for (int i = 0; i < quotes.length(); i++) {
+                    JSONObject quote = quotes.getJSONObject(i);
+
+                    int quoteId = quote.getInt("id");
+                    String quoteType = quote.getString("quoteType");
+                    String expiryDate = quote.getString("expiryDate");
+                    double quotePrice = quote.getDouble("quotePrice");
+                    Boolean paid = quote.getBoolean("paid");
+                    Boolean expired = quote.getBoolean("expired");
+
+
+                    if (!paid && !expired) {
+                        quotesTable += "<tr>";
+                        quotesTable += "<td class='quoteTableCell'>" + quoteType + "</td>";
+                        quotesTable += "<td class='quoteTableCell'>" + expiryDate + "</td>";
+                        quotesTable += "<td class='quoteTableCell'>" + quotePrice + "</td>";
+                        quotesTable += "<td class='quoteTableCell'>" +
+                                "<form class='hiddenQuoteForm' action='getQuote' method='GET'>" +
+                                "<input class='hiddenQuoteInput' type='hidden' name='quoteId' value=" + quoteId + ">" +
+                                "<input class='hiddenQuoteInput' type='hidden' name='quoteType' value=" + quoteType + ">" +
+                                "<button class='getQuoteBtn' type='submit'>Purchase</button>" +
+                                "</form></td>";
+                        quotesTable += "</tr>";
+                    }
+                }
             }
         %>
-        <table id="yourPlansTable">
+        <table class="yourPlansTable">
             <%=summaryTable%>
+        </table><br>
+    </div>
+    <div class="pagemaindiv">
+        <h2>Your Quotes</h2>
+        <table class="yourPlansTable">
+            <%=quotesTable%>
         </table>
     </div>
 </div>
