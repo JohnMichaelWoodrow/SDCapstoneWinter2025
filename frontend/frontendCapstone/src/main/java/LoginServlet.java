@@ -7,7 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -48,8 +53,30 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (found) {
-            request.getSession().setAttribute("userId", userId);
-            response.sendRedirect("quote.jsp");
+            // Set session variables
+            HttpSession session = request.getSession();
+            session.setAttribute("userId", userId);
+            session.setAttribute("name", username);
+
+            // Get customer data from API
+            URL customerUrl = new URL("http://localhost:8080/v1/customer/" + userId);
+            HttpURLConnection customerConn = (HttpURLConnection) customerUrl.openConnection();
+            customerConn.setRequestMethod("GET");
+            customerConn.setRequestProperty("Content-Type", "application/json");
+
+            StringBuilder result = new StringBuilder();
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(customerConn.getInputStream(), "utf-8"))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    result.append(line.trim());
+                }
+            }
+
+            customerConn.disconnect();
+
+            // Forward the customer JSON string to the JSP page
+            request.setAttribute("policies", result.toString());
+            request.getRequestDispatcher("quote.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "Email or password is incorrect.");
             request.getRequestDispatcher("login.jsp").forward(request, response);

@@ -1,3 +1,5 @@
+<%@ page import="org.json.JSONObject" %>
+<%@ page import="org.json.JSONArray" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -106,20 +108,38 @@
 
     <div class="pagemaindiv">
         <h2>Your Policies</h2>
+        <%
+            String quoteJson = (String) request.getAttribute("policies");
+
+            String summaryTable = "";
+
+            if (quoteJson != null) {
+                JSONObject customer = new JSONObject(quoteJson);
+                JSONArray policies = customer.getJSONArray("policies");
+
+                summaryTable += "<tr><th class='quoteTableHeader'>Type</th><th class='quoteTableHeader'>Start Date</th><th class='quoteTableHeader'>End Date</th><th class='quoteTableHeader'>Status</th><th class='quoteTableHeader'>Total Premium</th></tr>";
+
+                for (int i = 0; i < policies.length(); i++) {
+                    JSONObject policy = policies.getJSONObject(i);
+
+                    String policyType = policy.getString("policyType");
+                    String startDate = policy.getString("startDate");
+                    String endDate = policy.getString("endDate");
+                    String status = policy.getString("status");
+                    double totalPremium = policy.getDouble("totalPremium");
+
+                    summaryTable += "<tr>";
+                    summaryTable += "<td class='quoteTableCell'>" + policyType + "</td>";
+                    summaryTable += "<td class='quoteTableCell'>" + startDate + "</td>";
+                    summaryTable += "<td class='quoteTableCell'>" + endDate + "</td>";
+                    summaryTable += "<td class='quoteTableCell'>" + status + "</td>";
+                    summaryTable += "<td class='quoteTableCell'>$" + totalPremium + "</td>";
+                    summaryTable += "</tr>";
+                }
+            }
+        %>
         <table id="yourPlansTable">
-            <caption id="yourPlansTableCaption">Your Current Policies</caption>
-            <tr>
-                <th class="quoteTableHeader">Type</th>
-                <th class="quoteTableHeader">Remaining</th>
-                <th class="quoteTableHeader">Date Paid</th>
-                <th class="quoteTableHeader">Cost</th>
-            </tr>
-            <tr>
-                <td class="quoteTableCell">Auto</td>
-                <td class="quoteTableCell">4 Months</td>
-                <td class="quoteTableCell">2024-01-01</td>
-                <td class="quoteTableCell">$750</td>
-            </tr>
+            <%=summaryTable%>
         </table>
     </div>
 </div>
