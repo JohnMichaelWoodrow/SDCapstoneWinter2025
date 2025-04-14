@@ -120,7 +120,7 @@
 
                 JSONArray quotes = customer.getJSONArray("quotes");
 
-                summaryTable += "<tr><th class='quoteTableHeader'>Type</th><th class='quoteTableHeader'>Start Date</th><th class='quoteTableHeader'>End Date</th><th class='quoteTableHeader'>Status</th><th class='quoteTableHeader'>Total Premium</th></tr>";
+                summaryTable += "<tr><th class='quoteTableHeader'>Type</th><th class='quoteTableHeader'>Start Date</th><th class='quoteTableHeader'>End Date</th><th class='quoteTableHeader'>Status</th><th class='quoteTableHeader'>Total Premium</th><th class='quoteTableHeader'>Details</th></tr>";
 
                 for (int i = 0; i < policies.length(); i++) {
                     JSONObject policy = policies.getJSONObject(i);
@@ -131,13 +131,21 @@
                     String status = policy.getString("status");
                     double totalPremium = policy.getDouble("totalPremium");
 
+                    int policyId = policy.getInt("id");
+
                     summaryTable += "<tr>";
                     summaryTable += "<td class='quoteTableCell'>" + policyType + "</td>";
                     summaryTable += "<td class='quoteTableCell'>" + startDate + "</td>";
                     summaryTable += "<td class='quoteTableCell'>" + endDate + "</td>";
                     summaryTable += "<td class='quoteTableCell'>" + status + "</td>";
                     summaryTable += "<td class='quoteTableCell'>$" + totalPremium + "</td>";
+                    summaryTable += "<td class='quoteTableCell'>" +
+                            "<form class='hiddenQuoteForm' action='getPolicy' method='GET'>" +
+                            "<input type='hidden' name='policyId' value='" + policyId + "'>" +
+                            "<button class='getQuoteBtn' type='submit'>Details</button>" +
+                            "</form></td>";
                     summaryTable += "</tr>";
+
                 }
 
                 quotesTable += "<tr><th class='quoteTableHeader'>Type</th><th class='quoteTableHeader'>Expires</th><th class='quoteTableHeader'>Price</th><th class='quoteTableHeader'>Purchase</th></tr>";
