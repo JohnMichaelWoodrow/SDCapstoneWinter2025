@@ -51,22 +51,22 @@
                 <h2 class="getAQuoteHeader">Get an Auto Quote</h2>
 
                 <label for="make">Vehicle Make:</label>
-                <input class="quoteInput" type="text" id="make" name="make"><br>
+                <input class="quoteInput" type="text" id="make" name="make" required><br>
 
                 <label for="model">Vehicle Model:</label>
-                <input class="quoteInput" type="text" id="model" name="model"><br>
+                <input class="quoteInput" type="text" id="model" name="model" required><br>
 
                 <label for="year">Vehicle Year:</label>
-                <input class="quoteInput" type="number" id="year" name="year"><br>
+                <input class="quoteInput" type="number" id="year" name="year" required><br>
 
                 <label for="vin">Vehicle VIN:</label>
-                <input class="quoteInput" type="text" id="vin" name="vin"><br>
+                <input class="quoteInput" type="text" id="vin" name="vin" required><br>
 
                 <label for="driverAge">Driver Age:</label>
-                <input class="quoteInput" type="number" id="driverAge" name="driverAge"><br>
+                <input class="quoteInput" type="number" id="driverAge" name="driverAge" required><br>
 
                 <label for="accidentCount">Accident Count:</label>
-                <input class="quoteInput" type="number" id="accidentCount" name="accidentCount"><br>
+                <input class="quoteInput" type="number" id="accidentCount" name="accidentCount" required><br>
 
                 <button class="calculateQuoteBtn" type="submit">Calculate</button>
             </form>
@@ -106,19 +106,16 @@
             </form>
 
         </div>
-
         <%
             String quoteError = (String) request.getAttribute("quoteError");
             if (quoteError != null) {
         %>
-        <div style="color: red; font-weight: bold; margin-bottom: 10px;">
+        <div style="color: red; font-weight: bold; text-align: center">
             <%= quoteError %>
         </div>
         <%
             }
         %>
-
-
     </div>
 
     <div class="pagemaindiv">

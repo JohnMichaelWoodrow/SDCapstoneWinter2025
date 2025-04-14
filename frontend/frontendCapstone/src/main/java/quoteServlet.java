@@ -2,9 +2,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -17,14 +23,51 @@ public class quoteServlet extends HttpServlet {
         // Collect form data
         String make = request.getParameter("make");
         String model = request.getParameter("model");
-        int year = Integer.parseInt(request.getParameter("year"));
         String vin = request.getParameter("vin");
 
-        int driverAge = Integer.parseInt(request.getParameter("driverAge"));
-        int accidentCount = Integer.parseInt(request.getParameter("accidentCount"));
+        String yearStr = request.getParameter("year");
+        String driverAgeStr = request.getParameter("driverAge");
+        String accidentCountStr = request.getParameter("accidentCount");
 
         // Gets UserID
         Long customerId = (Long) request.getSession().getAttribute("userId");
+
+        // Error handling
+        boolean inputError = false;
+
+        int year = Integer.parseInt(yearStr);
+        int driverAge = Integer.parseInt(driverAgeStr);
+        int accidentCount = Integer.parseInt(accidentCountStr);
+
+        if (accidentCount < 0) {
+            request.setAttribute("quoteError", "Accident count must be greater than or equal to 0");
+            inputError = true;
+        } else if (driverAge < 18) {
+            request.setAttribute("quoteError", "Driver age must be greater than or equal to 18");
+            inputError = true;
+        } else if (year <= 1900) {
+            request.setAttribute("quoteError", "Car year must be greater than 1900");
+            inputError = true;
+        }
+
+        if (inputError) {
+            URL customerUrl = new URL("http://localhost:8080/v1/customer/" + customerId);
+            HttpURLConnection customerConn = (HttpURLConnection) customerUrl.openConnection();
+            customerConn.setRequestMethod("GET");
+            customerConn.setRequestProperty("Content-Type", "application/json");
+
+            StringBuilder result = new StringBuilder();
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(customerConn.getInputStream(), "utf-8"))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    result.append(line.trim());
+                }
+            }
+            customerConn.disconnect();
+
+            request.setAttribute("policies", result.toString());
+            request.getRequestDispatcher("quote.jsp").forward(request, response);
+        }
 
         // No UserID gets booted
         if (customerId == null) {
