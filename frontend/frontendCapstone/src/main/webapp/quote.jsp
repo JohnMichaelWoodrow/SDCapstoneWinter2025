@@ -40,8 +40,11 @@
             if (userName != null) {
                 user = userName;
             }
+            java.time.DayOfWeek dayOfWeek = java.time.LocalDate.now().getDayOfWeek();
         %>
-        <h2>Happy Thursday <%=user%></h2>
+
+        <h2>Happy <%= dayOfWeek.toString().charAt(0) + dayOfWeek.toString().substring(1).toLowerCase() %> <%= user %>!</h2>
+
         <div id="getAQuoteDiv">
 
             <form class="getAQuoteForm" action="get-quote" method="POST">
@@ -102,8 +105,20 @@
                 <button class="calculateQuoteBtn" type="submit">Calculate</button>
             </form>
 
-
         </div>
+
+        <%
+            String quoteError = (String) request.getAttribute("quoteError");
+            if (quoteError != null) {
+        %>
+        <div style="color: red; font-weight: bold; margin-bottom: 10px;">
+            <%= quoteError %>
+        </div>
+        <%
+            }
+        %>
+
+
     </div>
 
     <div class="pagemaindiv">
