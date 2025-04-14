@@ -25,19 +25,15 @@ public class quoteServlet extends HttpServlet {
         String model = request.getParameter("model");
         String vin = request.getParameter("vin");
 
-        String yearStr = request.getParameter("year");
-        String driverAgeStr = request.getParameter("driverAge");
-        String accidentCountStr = request.getParameter("accidentCount");
+        int year = Integer.parseInt(request.getParameter("year"));
+        int driverAge = Integer.parseInt(request.getParameter("driverAge"));
+        int accidentCount = Integer.parseInt(request.getParameter("accidentCount"));
 
         // Gets UserID
         Long customerId = (Long) request.getSession().getAttribute("userId");
 
         // Error handling
         boolean inputError = false;
-
-        int year = Integer.parseInt(yearStr);
-        int driverAge = Integer.parseInt(driverAgeStr);
-        int accidentCount = Integer.parseInt(accidentCountStr);
 
         if (accidentCount < 0) {
             request.setAttribute("quoteError", "Accident count must be greater than or equal to 0");
@@ -67,6 +63,7 @@ public class quoteServlet extends HttpServlet {
 
             request.setAttribute("policies", result.toString());
             request.getRequestDispatcher("quote.jsp").forward(request, response);
+            return;
         }
 
         // No UserID gets booted

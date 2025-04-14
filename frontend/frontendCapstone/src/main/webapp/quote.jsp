@@ -75,35 +75,38 @@
                 <h2 class="getAQuoteHeader">Get a Home Quote</h2>
 
                 <label for="address">Address:</label>
-                <input class="quoteInput" type="text" id="address" name="address"><br>
+                <input class="quoteInput" type="text" id="address" name="address" required><br>
 
                 <label for="yearBuilt">Year Built:</label>
-                <input class="quoteInput" type="number" id="yearBuilt" name="yearBuilt"><br>
+                <input class="quoteInput" type="number" id="yearBuilt" name="yearBuilt" required><br>
 
                 <label for="homeValue">Home Value:</label>
-                <input class="quoteInput" type="number" id="homeValue" name="homeValue" step="1000"><br>
+                <input class="quoteInput" type="number" id="homeValue" name="homeValue" step="1000" required><br>
 
                 <label for="typeOfDwelling">Type of Dwelling:</label>
-                <input class="quoteInput" type="text" id="typeOfDwelling" name="typeOfDwelling"><br>
+                <input class="quoteInput" type="text" id="typeOfDwelling" name="typeOfDwelling" required><br>
 
                 <label for="heatingType">Heating Type:</label>
-                <select class="quoteInput" id="heatingType" name="heatingType">
+                <select class="quoteInput" id="heatingType" name="heatingType" required>
+                    <option value="">-- Select Heating Type --</option>
                     <option value="Oil">Oil</option>
                     <option value="Wood">Wood</option>
                     <option value="Other">Other</option>
                 </select><br>
 
                 <label for="location">Home Location:</label>
-                <select class="quoteInput" id="location" name="location">
+                <select class="quoteInput" id="location" name="location" required>
+                    <option value="">-- Select Location --</option>
                     <option value="Urban">Urban</option>
                     <option value="Rural">Rural</option>
                 </select><br>
 
                 <label for="liabilityLimit">Liability Limit:</label>
-                <input class="quoteInput" type="number" id="liabilityLimit" name="liabilityLimit" step="10000"><br>
+                <input class="quoteInput" type="number" id="liabilityLimit" name="liabilityLimit" required><br>
 
                 <button class="calculateQuoteBtn" type="submit">Calculate</button>
             </form>
+
 
         </div>
         <%
