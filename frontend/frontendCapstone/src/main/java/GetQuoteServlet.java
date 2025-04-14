@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
@@ -29,11 +28,11 @@ public class GetQuoteServlet  extends HttpServlet {
         quoteConn.setRequestMethod("GET");
         quoteConn.setRequestProperty("Content-Type", "application/json");
 
-        StringBuilder result = new StringBuilder();
+        StringBuilder quoteJson = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(quoteConn.getInputStream(), "utf-8"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                result.append(line.trim());
+                quoteJson.append(line.trim());
             }
         }
 
@@ -47,8 +46,23 @@ public class GetQuoteServlet  extends HttpServlet {
             session.setAttribute("quoteType", "vehicle");
         }
 
-        // Forward the customer JSON string to the JSP page
-        request.setAttribute("quote", result.toString());
-        request.getRequestDispatcher("quoteSummary.jsp").forward(request, response);
+        // Agent or Customer logic + Home or Auto
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode quoteNode = mapper.readTree(quoteJson.toString());
+        String type = quoteNode.get("quoteType").asText();
+
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
+
+        request.setAttribute("quote", quoteJson.toString());
+
+        if ("agent".equalsIgnoreCase(role)) {
+            session.setAttribute("returnTo", "/agentDashboard.jsp");
+            request.getRequestDispatcher("agentQuoteDetails.jsp").forward(request, response);
+        } else {
+            session.setAttribute("quoteType", type);
+            request.getRequestDispatcher("quoteSummary.jsp").forward(request, response);
+        }
+
     }
 }

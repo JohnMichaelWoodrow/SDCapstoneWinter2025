@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -63,7 +64,17 @@ public class GetPolicyServlet extends HttpServlet {
 
         quoteConn.disconnect();
 
+        // Determines whether to send session to customer or agent side
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
+
         request.setAttribute("policy", quoteJson.toString());
-        request.getRequestDispatcher("policyDetails.jsp").forward(request, response);
+
+        if ("agent".equalsIgnoreCase(role)) {
+            request.getRequestDispatcher("agentPolicyDetails.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("policyDetails.jsp").forward(request, response);
+        }
+
     }
 }

@@ -27,7 +27,7 @@ public class purchaseServlet extends HttpServlet {
         String quoteId = request.getParameter("id");
         String userId = request.getParameter("userId");
 
-        if (Objects.equals(quoteType, "vehicle")) {
+        if ("Auto".equalsIgnoreCase(quoteType)) {
             // Mark the quote as paid
             URL quoteUrl = new URL("http://localhost:8080/v1/auto_quote/" + quoteId + "/paid?paid=true");
             HttpURLConnection quoteConn = (HttpURLConnection) quoteUrl.openConnection();
@@ -37,7 +37,7 @@ public class purchaseServlet extends HttpServlet {
 
             quoteStatus = quoteConn.getResponseCode();
             quoteConn.disconnect();
-        } else {
+        } else if ("Home".equalsIgnoreCase(quoteType)) {
             // Mark the quote as paid
             URL quoteUrl = new URL("http://localhost:8080/v1/home_quote/" + quoteId + "/paid?paid=true");
             HttpURLConnection quoteConn = (HttpURLConnection) quoteUrl.openConnection();
@@ -48,7 +48,6 @@ public class purchaseServlet extends HttpServlet {
             quoteStatus = quoteConn.getResponseCode();
             quoteConn.disconnect();
         }
-
 
         // Create the policy if quote was marked as paid
         if (quoteStatus == 200 || quoteStatus == 204) {
