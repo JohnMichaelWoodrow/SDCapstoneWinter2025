@@ -43,6 +43,17 @@
             </form>
         </div>
 
+        <%
+            String error = (String) request.getAttribute("error");
+            if (error != null) {
+        %>
+        <div style="color: red; font-weight: bold; text-align: center">
+            <%= error %>
+        </div>
+        <%
+            }
+        %>
+
     </div>
 </div>
 
