@@ -20,9 +20,11 @@
     }
 
     String quotebtn = "";
+    String logoutbtn = "";
 
     if (userId != null) {
         quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Quote Dashboard</button>" + "</form>";
+        logoutbtn += "<a href='logout'>Logout</a>";
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
@@ -45,7 +47,7 @@
         </div>
         <div id="navbarlogin">
             <a href="login.jsp"><img id="profileimg" src="images/Josh.png"></a>
-            <a href="logout">Logout</a>
+            <%= logoutbtn %>
         </div>
     </div>
 

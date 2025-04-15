@@ -4,6 +4,13 @@
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
+
+    Long userId = (Long) session.getAttribute("userId");
+
+    if (userId == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
 %>
 <!DOCTYPE html>
 <html>

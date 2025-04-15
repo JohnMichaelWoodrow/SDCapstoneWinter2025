@@ -9,11 +9,14 @@
     Long userId = (Long) session.getAttribute("userId");
 
     String quotebtn = "";
+    String logoutbtn = "";
 
     if (Objects.equals(userRole, "customer")) {
         quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Quote Dashboard</button>" + "</form>";
+        logoutbtn += "<a href='logout'>Logout</a>";
     } else if (Objects.equals(userRole, "agent")) {
         quotebtn += "<a class='navbarbtn' href='agentDashboard.jsp'>Agent Dashboard</a>";
+        logoutbtn += "<a href='logout'>Logout</a>";
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
@@ -40,6 +43,7 @@
         </div>
         <div id="navbarlogin">
             <a href="login.jsp"><img id="profileimg" src="images/profile.jpg"></a>
+            <%= logoutbtn %>
         </div>
     </div>
     <br>
