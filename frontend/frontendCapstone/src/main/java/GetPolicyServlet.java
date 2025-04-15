@@ -68,7 +68,8 @@ public class GetPolicyServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
 
-        request.setAttribute("policy", quoteJson.toString());
+        request.setAttribute("policy", policyNode.toString());
+        request.setAttribute("quote", quoteJson.toString());
 
         if ("agent".equalsIgnoreCase(role)) {
             request.getRequestDispatcher("agentPolicyDetails.jsp").forward(request, response);
