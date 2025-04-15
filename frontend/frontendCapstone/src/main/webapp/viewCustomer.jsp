@@ -79,7 +79,7 @@
                     summaryTable += "</tr>";
                 }
 
-                quotesTable += "<tr><th class='quoteTableHeader'>Type</th><th class='quoteTableHeader'>Expires</th><th class='quoteTableHeader'>Price</th><th class='quoteTableHeader'>Purchase</th></tr>";
+                quotesTable += "<tr><th class='quoteTableHeader'>Type</th><th class='quoteTableHeader'>Expires</th><th class='quoteTableHeader'>Price</th><th class='quoteTableHeader'>Details</th></tr>";
 
                 for (int i = 0; i < quotes.length(); i++) {
                     JSONObject quote = quotes.getJSONObject(i);
@@ -99,7 +99,7 @@
                                 "<form class='hiddenQuoteForm' action='getQuote' method='GET'>" +
                                 "<input type='hidden' name='quoteId' value=" + quoteId + ">" +
                                 "<input type='hidden' name='quoteType' value=" + quoteType + ">" +
-                                "<button class='getQuoteBtn' type='submit'>Purchase</button>" +
+                                "<button class='getQuoteBtn' type='submit'>Details</button>" +
                                 "</form></td>";
                         quotesTable += "</tr>";
                     }

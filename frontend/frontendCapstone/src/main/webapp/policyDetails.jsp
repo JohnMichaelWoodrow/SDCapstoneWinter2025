@@ -112,7 +112,7 @@
                 <input type="hidden" name="quoteId" value="<%= quoteId %>">
                 <button class="loginregbtn" type="submit">Cancel Policy</button>
             </form>
-            <form action="cancelQuote" method="GET">
+            <form action="quoteDashboard" method="GET">
                 <input type="hidden" name="userId" value="<%= session.getAttribute("userId") %>">
                 <button class="quoteActionBtn" type="submit">Return to Quote Page</button>
             </form>
