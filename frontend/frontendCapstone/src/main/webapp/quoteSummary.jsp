@@ -1,4 +1,5 @@
 <%@ page import="org.json.JSONObject" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -12,11 +13,17 @@
     }
 
     Long userId = (Long) session.getAttribute("userId");
+    String userRole = (String) session.getAttribute("role");
+
+    if (!Objects.equals(userRole, "customer")) {
+        response.sendRedirect("index.jsp");
+        return;
+    }
 
     String quotebtn = "";
 
     if (userId != null) {
-        quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Get a Quote</button>" + "</form>";
+        quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Quote Dashboard</button>" + "</form>";
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }

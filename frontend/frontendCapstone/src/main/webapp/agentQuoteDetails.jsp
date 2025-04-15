@@ -1,9 +1,16 @@
 <%@ page import="org.json.JSONObject" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
+
+    String userRole = (String) session.getAttribute("role");
+    if (!Objects.equals(userRole, "agent")) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +24,7 @@
         <a href="index.jsp"><img id="navbarimg" src="images/TaylorIns-inv.png"></a>
         <div id="navbarbuttons">
             <a class="navbarbtn" href="index.jsp">Home</a>
-            <a class="navbarbtn" href="agentDashboard.jsp">Dashboard</a>
+            <a class="navbarbtn" href="agentDashboard.jsp">Agent Dashboard</a>
             <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
     </div>

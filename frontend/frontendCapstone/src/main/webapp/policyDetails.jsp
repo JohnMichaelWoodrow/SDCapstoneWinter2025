@@ -17,7 +17,7 @@
         <a href="index.jsp"><img id="navbarimg" src="images/TaylorIns-inv.png"></a>
         <div id="navbarbuttons">
             <a class="navbarbtn" href="index.jsp">Home</a>
-            <a class="navbarbtn" href="quote.jsp">Get a Quote</a>
+            <a class="navbarbtn" href="quote.jsp">Quote Dashboard</a>
             <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
     </div>

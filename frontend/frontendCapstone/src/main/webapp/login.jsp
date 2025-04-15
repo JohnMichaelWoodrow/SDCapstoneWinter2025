@@ -1,3 +1,4 @@
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -5,6 +6,7 @@
     response.setDateHeader("Expires", 0);
 
     Long userId = (Long) session.getAttribute("userId");
+    String userRole = (String) session.getAttribute("role");
 
     String quotebtn = "";
 
@@ -13,6 +15,15 @@
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
+
+    if (Objects.equals(userRole, "customer")) {
+        response.sendRedirect("index.jsp");
+        return;
+    } else if (Objects.equals(userRole, "agent")) {
+        response.sendRedirect("index.jsp");
+        return;
+    }
+
 %>
 <!DOCTYPE html>
 <html>
