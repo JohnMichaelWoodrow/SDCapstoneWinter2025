@@ -3,6 +3,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -33,7 +34,14 @@ public class DeletePolicyServlet extends HttpServlet {
         quoteConn.disconnect();
 
         // Allows this servlet to use the cancel button servlet to return to the quote page
-        Long userId = (Long) request.getSession().getAttribute("userId");
-        response.sendRedirect("cancelQuote?userId=" + userId);
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
+
+        if ("agent".equalsIgnoreCase(role)) {
+            response.sendRedirect("agentDashboard.jsp");
+        } else {
+            Long userId = (Long) request.getSession().getAttribute("userId");
+            response.sendRedirect("cancelQuote?userId=" + userId);
+        }
     }
 }

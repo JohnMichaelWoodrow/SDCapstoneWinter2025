@@ -29,6 +29,7 @@
 
             if (quoteJson != null) {
                 JSONObject quote = new JSONObject(quoteJson);
+                int quoteId = quote.getInt("id");
 
                 double price = quote.getDouble("quotePrice");
                 String expiryDate = quote.optString("expiryDate", "N/A");
@@ -87,6 +88,11 @@
         </table>
 
         <div id="quoteActionDiv">
+            <form action="deleteQuote" method="POST" onsubmit="return confirm('Are you sure you want to delete this quote?');">
+                <input type="hidden" name="quoteId" value="<%= quoteId %>">
+                <button class="loginregbtn" type="submit">Delete Quote</button>
+            </form>
+
             <form action="agentDashboard.jsp" method="GET">
                 <button class="quoteActionBtn" type="submit">Return to Dashboard</button>
             </form>
