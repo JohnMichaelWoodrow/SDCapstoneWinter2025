@@ -45,7 +45,11 @@
             <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
-            <a href="login.jsp"><img id="profileimg" src="images/profile.jpg"></a>
+            <form action="userProfile">
+                <input value="<%= userId %>" name="userId" type="hidden">
+                <button class="profileBtn" type="submit">Profile</button>
+            </form>
+            <a class='logoutbtn' href="logout"><i class="fa fa-sign-out"></i></a>
         </div>
     </div>
 

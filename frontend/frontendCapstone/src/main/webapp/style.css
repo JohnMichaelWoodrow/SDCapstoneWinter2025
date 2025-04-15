@@ -367,3 +367,68 @@ footer h3 {
     color: lightskyblue;
     background-color: rgb(128, 128, 128);
 }
+
+.userProfileHeader {
+    text-align: center;
+}
+
+#userProfileDiv {
+    justify-content: center;
+    width: 90%;
+    border: 2px solid darkgray;
+    margin: 0 auto;
+    margin-top: 90px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.profileImg img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 400px;
+    width: 400px;
+}
+
+.profileUpdateDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* space between forms */
+}
+
+.profileUpdateForm {
+    text-align: center;
+    width: 500px; /* Adjust as needed */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.profileBtn {
+    margin: 5px;
+    color: white;
+    padding: 5px;
+    font-size: 130%;
+    background-color: lightskyblue;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border: none;
+    border-radius: 5px;
+}
+
+.profileBtn:hover {
+    background-color: navy;
+}
+
+.logoutbtn {
+    font-size: 150%;
+    color: #000023;
+    transition-duration: 0.2s;
+}
+
+.logoutbtn:hover {
+    color: white;
+}

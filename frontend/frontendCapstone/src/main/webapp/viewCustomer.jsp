@@ -36,8 +36,11 @@
             <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
-            <a href="login.jsp"><img id="profileimg" src="images/profile.jpg"></a>
-            <a href="logout">Logout</a>
+            <form action="userProfile">
+                <input value="<%= agentId %>" name="userId" type="hidden">
+                <button class="profileBtn" type="submit">Profile</button>
+            </form>
+            <a class='logoutbtn' href="logout"><i class="fa fa-sign-out"></i></a>
         </div>
     </div>
 

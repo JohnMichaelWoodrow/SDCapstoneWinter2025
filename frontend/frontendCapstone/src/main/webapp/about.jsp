@@ -10,13 +10,16 @@
 
     String quotebtn = "";
     String logoutbtn = "";
+    String profilebtn = "";
 
     if (Objects.equals(userRole, "customer")) {
         quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Quote Dashboard</button>" + "</form>";
-        logoutbtn += "<a href='logout'>Logout</a>";
+        logoutbtn += "<a class='logoutbtn' href='logout'><i class='fa fa-sign-out'></i></a>";
+        profilebtn += "<form action='userProfile'><input value= " +  userId + " name='userId' type='hidden'><button class='profileBtn' type='submit'>Profile</button></form>";
     } else if (Objects.equals(userRole, "agent")) {
         quotebtn += "<a class='navbarbtn' href='agentDashboard.jsp'>Agent Dashboard</a>";
-        logoutbtn += "<a href='logout'>Logout</a>";
+        logoutbtn += "<a class='logoutbtn' href='logout'><i class='fa fa-sign-out'></i></a>";
+        profilebtn += "<form action='userProfile'><input value= " +  userId + " name='userId' type='hidden'><button class='profileBtn' type='submit'>Profile</button></form>";
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
@@ -42,7 +45,7 @@
             <a class="navbarbtn" href="index.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
-            <a href="login.jsp"><img id="profileimg" src="images/profile.jpg"></a>
+            <%= profilebtn %>
             <%= logoutbtn %>
         </div>
     </div>

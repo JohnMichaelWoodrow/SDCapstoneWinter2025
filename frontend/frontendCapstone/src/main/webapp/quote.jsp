@@ -24,7 +24,7 @@
 
     if (userId != null) {
         quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Quote Dashboard</button>" + "</form>";
-        logoutbtn += "<a href='logout'>Logout</a>";
+        logoutbtn += "<a class='logoutbtn' href='logout'><i class='fa fa-sign-out'></i></a>";
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
@@ -35,6 +35,7 @@
     <title>Get a Quote</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="images/TaylorIns-inv.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div id="maindiv">
@@ -46,7 +47,11 @@
             <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
-            <a href="login.jsp"><img id="profileimg" src="images/Josh.png"></a>
+<%--            <a href="userProfile.jsp"><img id="profileimg" src="images/Josh.png"></a>--%>
+            <form action="userProfile">
+                <input value="<%= userId %>" name="userId" type="hidden">
+                <button type="submit">Profile</button>
+            </form>
             <%= logoutbtn %>
         </div>
     </div>

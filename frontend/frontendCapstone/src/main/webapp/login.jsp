@@ -42,7 +42,7 @@
             <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
-            <a href="login.jsp"><img id="profileimg" src="images/profile.jpg"></a>
+
         </div>
     </div>
 

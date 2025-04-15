@@ -5,6 +5,8 @@
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
 
+    Long userId = (Long) session.getAttribute("userId");
+
     String userRole = (String) session.getAttribute("role");
     String agentName = (String) session.getAttribute("name");
     if (!Objects.equals(userRole, "agent")) {
@@ -18,6 +20,7 @@
     <title>Agent Dashboard</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="images/TaylorIns-inv.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div id="maindiv">
@@ -29,8 +32,11 @@
             <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
-            <a href="login.jsp"><img id="profileimg" src="images/profile.jpg"></a>
-            <a href="logout">Logout</a>
+            <form action="userProfile">
+                <input value="<%= userId %>" name="userId" type="hidden">
+                <button class="profileBtn" type="submit">Profile</button>
+            </form>
+            <a class='logoutbtn' href="logout"><i class="fa fa-sign-out"></i></a>
         </div>
     </div>
 
