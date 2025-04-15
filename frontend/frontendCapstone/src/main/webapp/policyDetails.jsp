@@ -27,8 +27,10 @@
         <%
             String policyJson = (String) request.getAttribute("policy");
 
+            JSONObject quote = new JSONObject(policyJson);
+            int quoteId = quote.getInt("id");
+
             if (policyJson != null) {
-                JSONObject quote = new JSONObject(policyJson);
 
                 double price = quote.getDouble("quotePrice");
                 String expiryDate = quote.optString("expiryDate", "N/A");
@@ -91,11 +93,15 @@
         <% } %>
 
         <div id="quoteActionDiv">
+            <form action="deletePolicy" method="POST" onsubmit="return confirm('Are you sure you want to cancel this policy?');">
+                <input type="hidden" name="policyId" value="<%= request.getParameter("policyId") %>">
+                <input type="hidden" name="quoteId" value="<%= quoteId %>">
+                <button class="loginregbtn" type="submit">Cancel Policy</button>
+            </form>
             <form action="cancelQuote" method="GET">
                 <input type="hidden" name="userId" value="<%= session.getAttribute("userId") %>">
                 <button class="quoteActionBtn" type="submit">Return to Quote Page</button>
             </form>
-
         </div>
 
     </div>

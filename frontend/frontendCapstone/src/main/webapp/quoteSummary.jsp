@@ -110,11 +110,15 @@
                 <input class="purchaseInput" type="hidden" id="userId" name="userId" value="<%= userId %>"><br>
                 <button class="loginregbtn" type="submit">Purchase</button>
             </form>
+            <form action="deleteQuote" method="POST" onsubmit="return confirm('Are you sure you want to delete this quote?');">
+                <input type="hidden" name="quoteId" value="<%= quoteId %>">
+                <button class="loginregbtn" type="submit">Delete</button>
+            </form>
             <form action="cancelQuote" method="GET">
                 <input class="purchaseInput" type="hidden" name="userId" value="<%= userId %>">
                 <button class="quoteActionBtn" type="submit">Cancel</button>
             </form>
-<%--            <button class="quoteActionBtn" onclick="window.location.href='quote.jsp'">Cancel</button>--%>
+            <%--            <button class="quoteActionBtn" onclick="window.location.href='quote.jsp'">Cancel</button>--%>
         </div>
 
         <% } else { %>
