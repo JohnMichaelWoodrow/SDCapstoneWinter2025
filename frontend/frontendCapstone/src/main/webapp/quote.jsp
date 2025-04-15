@@ -47,10 +47,9 @@
             <a class="navbarbtn" href="about.jsp">About Us</a>
         </div>
         <div id="navbarlogin">
-<%--            <a href="userProfile.jsp"><img id="profileimg" src="images/Josh.png"></a>--%>
             <form action="userProfile">
                 <input value="<%= userId %>" name="userId" type="hidden">
-                <button type="submit">Profile</button>
+                <button class='profileBtn' type="submit">Profile</button>
             </form>
             <%= logoutbtn %>
         </div>

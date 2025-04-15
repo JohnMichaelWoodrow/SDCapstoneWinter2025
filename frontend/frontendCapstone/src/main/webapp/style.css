@@ -427,6 +427,7 @@ footer h3 {
     font-size: 150%;
     color: #000023;
     transition-duration: 0.2s;
+    margin-left: 10%;
 }
 
 .logoutbtn:hover {
