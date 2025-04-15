@@ -1,15 +1,19 @@
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
 
+    String userRole = (String) session.getAttribute("role");
     Long userId = (Long) session.getAttribute("userId");
 
     String quotebtn = "";
 
-    if (userId != null) {
-        quotebtn += "<form class='quoteNavForm' action='cancelQuote' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Get a Quote</button>" + "</form>";
+    if (Objects.equals(userRole, "customer")) {
+        quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Get a Quote</button>" + "</form>";
+    } else if (Objects.equals(userRole, "agent")) {
+        quotebtn += "<a class='navbarbtn' href='agentDashboard.jsp'>Dashboard</a>";
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
@@ -115,4 +119,8 @@
         <p>Phone: +1 (709) 123-4567</p>
     </div>
 </footer>
+<script>
+    const userRole = "<%= userRole %>";
+    console.log("User role:", userRole);
+</script>
 </html>

@@ -16,7 +16,7 @@
     String quotebtn = "";
 
     if (userId != null) {
-        quotebtn += "<form class='quoteNavForm' action='cancelQuote' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Get a Quote</button>" + "</form>";
+        quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Get a Quote</button>" + "</form>";
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
@@ -93,8 +93,6 @@
                     summaryTable += "<tr><th>Location:</th><td>" + location + "</td></tr>";
                     summaryTable += "<tr><th>Liability Limit:</th><td>$" + liabilityLimit + "</td></tr>";
                 }
-
-                Long userId = (Long) session.getAttribute("userId");
         %>
 
         <table id="quoteSummaryTable">
@@ -125,7 +123,7 @@
                 <input type="hidden" name="quoteId" value="<%= quoteId %>">
                 <button class="loginregbtn" type="submit">Delete</button>
             </form>
-            <form action="cancelQuote" method="GET">
+            <form action="quoteDashboard" method="GET">
                 <input class="purchaseInput" type="hidden" name="userId" value="<%= userId %>">
                 <button class="quoteActionBtn" type="submit">Cancel</button>
             </form>

@@ -1,19 +1,19 @@
-<%@ page import="java.net.URL" %>
-<%@ page import="java.net.URLConnection" %>
-<%@ page import="java.io.BufferedReader" %>
-<%@ page import="java.io.InputStreamReader" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
 
+    String userRole = (String) session.getAttribute("role");
     Long userId = (Long) session.getAttribute("userId");
 
     String quotebtn = "";
 
-    if (userId != null) {
-        quotebtn += "<form class='quoteNavForm' action='cancelQuote' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Get a Quote</button>" + "</form>";
+    if (Objects.equals(userRole, "customer")) {
+        quotebtn += "<form class='quoteNavForm' action='quoteDashboard' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Get a Quote</button>" + "</form>";
+    } else if (Objects.equals(userRole, "agent")) {
+        quotebtn += "<a class='navbarbtn' href='agentDashboard.jsp'>Dashboard</a>";
     } else {
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
@@ -44,12 +44,9 @@
         <p>We take pride in having the best coverage for you and your family.</p>
         <div id="createAccountLink">
             <h3>Get a Quote now!</h3>
-            <a id="createAccountbtn" href="quote.jsp">Get A Quote!</a>
+            <%= quotebtn %>
         </div>
     </div>
-
-    <a href="user">Get Users</a> <%-- Test api calls --%>
-    <a href="customer">Get Customers</a>
 </div>
 
 </body>

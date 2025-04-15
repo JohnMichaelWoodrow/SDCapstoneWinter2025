@@ -15,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-@WebServlet("/cancelQuote")
+@WebServlet("/quoteDashboard")
 public class cancelQuoteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

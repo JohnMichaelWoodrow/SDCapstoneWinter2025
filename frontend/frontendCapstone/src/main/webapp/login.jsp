@@ -14,6 +14,7 @@
         quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
     }
 %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Login/Register</title>
