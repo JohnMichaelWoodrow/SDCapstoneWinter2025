@@ -339,3 +339,31 @@ footer h3 {
     font-size: 80%;
     border-radius: 10px;
 }
+
+.quoteNavForm {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.quoteNavForm button.navbarbtn {
+    all: unset; /* removes all browser default styles */
+    font-size: 150%;
+    background-color: lightskyblue;
+    text-decoration: none;
+    color: white;
+    padding: 6px 12px;
+    transition-duration: 0.2s;
+    height: 100%;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-family: Verdana, sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.quoteNavForm button.navbarbtn:hover {
+    color: lightskyblue;
+    background-color: rgb(128, 128, 128);
+}

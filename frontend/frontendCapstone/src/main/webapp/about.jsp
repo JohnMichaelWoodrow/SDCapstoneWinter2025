@@ -1,4 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    Long userId = (Long) session.getAttribute("userId");
+
+    String quotebtn = "";
+
+    if (userId != null) {
+        quotebtn += "<form class='quoteNavForm' action='cancelQuote' method='GET'>" + "<input class='purchaseInput' type='hidden' name='userId' value=" + userId + ">" + "<button class='navbarbtn' type='submit'>Get a Quote</button>" + "</form>";
+    } else {
+        quotebtn += "<a class='navbarbtn' href='quote.jsp'>Get a Quote</a>";
+    }
+%>
+<!DOCTYPE html>
 <html>
 <head>
     <title>About</title>
@@ -15,7 +31,7 @@
         <a href="index.jsp"><img id="navbarimg" src="images/TaylorIns-inv.png"></a>
         <div id="navbarbuttons">
             <a class="navbarbtn" href="index.jsp">Home</a>
-            <a class="navbarbtn" href="login.jsp">Get a Quote</a>
+            <%= quotebtn %>
             <a class="navbarbtn" href="index.jsp">About Us</a>
         </div>
         <div id="navbarlogin">

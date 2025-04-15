@@ -12,6 +12,7 @@
         return;
     }
 %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Customer View</title>

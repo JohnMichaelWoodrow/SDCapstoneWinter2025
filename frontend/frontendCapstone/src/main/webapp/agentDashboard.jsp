@@ -10,6 +10,7 @@
         return;
     }
 %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Agent Dashboard</title>

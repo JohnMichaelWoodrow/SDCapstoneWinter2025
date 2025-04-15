@@ -5,6 +5,7 @@
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
 %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Agent - Policy Details</title>
