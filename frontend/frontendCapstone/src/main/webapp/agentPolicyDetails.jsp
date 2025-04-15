@@ -25,14 +25,22 @@
         <h2>Viewing Customer Policy Details</h2>
 
         <%
+            String quoteJson = (String) request.getAttribute("quote");
             String policyJson = (String) request.getAttribute("policy");
 
-            if (policyJson != null) {
-                JSONObject quote = new JSONObject(policyJson);
-                int quoteId = quote.getInt("id");
+            JSONObject quote = new JSONObject(quoteJson);
+            JSONObject policy = new JSONObject(policyJson);
 
-                double price = quote.getDouble("quotePrice");
-                String expiryDate = quote.optString("expiryDate", "N/A");
+            int quoteId = quote.getInt("id");
+
+            if (quoteJson != null) {
+
+                double price = policy.getDouble("totalPremium");
+                double basePrice = policy.getDouble("basePremium");
+
+                String startDate = policy.getString("startDate");
+                String endDate = policy.getString("endDate");
+
                 String quoteType = quote.getString("quoteType");
 
                 String detailsTable = "";
@@ -45,9 +53,10 @@
                     int year = vehicle.getInt("year");
                     String vin = vehicle.getString("vin");
 
-                    detailsTable += "<tr><th>Quote Type:</th><td>Auto</td></tr>";
+                    detailsTable += "<tr><th>Policy Type:</th><td>Auto</td></tr>";
                     detailsTable += "<tr><th>Vehicle:</th><td>" + make + " " + model + " (" + year + ")</td></tr>";
                     detailsTable += "<tr><th>VIN:</th><td>" + vin + "</td></tr>";
+                    detailsTable += "<tr><th>Base Premium:</th><td>" + basePrice + "</td></tr>";
                 } else if (quoteType.equalsIgnoreCase("Home")) {
                     JSONObject home = quote.getJSONObject("home");
 
@@ -59,7 +68,7 @@
                     String location = home.getString("location");
                     double liabilityLimit = home.getDouble("liabilityLimit");
 
-                    detailsTable += "<tr><th>Quote Type:</th><td>Home</td></tr>";
+                    detailsTable += "<tr><th>Policy Type:</th><td>Home</td></tr>";
                     detailsTable += "<tr><th>Address:</th><td>" + address + "</td></tr>";
                     detailsTable += "<tr><th>Year Built:</th><td>" + yearBuilt + "</td></tr>";
                     detailsTable += "<tr><th>Home Value:</th><td>$" + homeValue + "</td></tr>";
@@ -67,6 +76,7 @@
                     detailsTable += "<tr><th>Heating Type:</th><td>" + heating + "</td></tr>";
                     detailsTable += "<tr><th>Location:</th><td>" + location + "</td></tr>";
                     detailsTable += "<tr><th>Liability Limit:</th><td>$" + liabilityLimit + "</td></tr>";
+                    detailsTable += "<tr><th>Base Premium:</th><td>$" + basePrice + "</td></tr>";
                 }
         %>
 
@@ -78,12 +88,12 @@
                 <td style="color:green;">$<%= price %></td>
             </tr>
             <tr>
-                <th>Expiry Date:</th>
-                <td><%= expiryDate %></td>
+                <th>Start Date:</th>
+                <td><%= startDate %></td>
             </tr>
             <tr>
-                <th>Payment Date:</th>
-                <td>N/A</td>
+                <th>End Date:</th>
+                <td><%= endDate %></td>
             </tr>
         </table>
 
