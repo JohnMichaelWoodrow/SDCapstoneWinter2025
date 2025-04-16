@@ -473,3 +473,17 @@ footer h3 {
 .logoutbtn:hover {
     color: white;
 }
+
+.updateProfileBtn {
+    background-color: navy;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 80%;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.updateProfileBtn:hover {
+    background-color: #000028;
+}
