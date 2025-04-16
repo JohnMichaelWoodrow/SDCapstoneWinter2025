@@ -100,6 +100,17 @@ body {
     background-color: #ECECEC;
 }
 
+#loginform label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#loginform input {
+    width: 250px;
+}
+
 #loginregdiv {
     width: 100%;
     text-align: center;
@@ -114,6 +125,17 @@ body {
     margin-bottom: 10px;
     border-radius: 20px;
     background-color: #ECECEC;
+}
+
+#registerform label {
+    display: inline-block;
+    width: 130px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#registerform input {
+    width: 250px;
 }
 
 .logininput {
@@ -231,6 +253,24 @@ body {
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
+}
+
+.getAQuoteForm label {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.getAQuoteForm input {
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+.getAQuoteForm select {
+    width: 250px;
+    margin-bottom: 10px;
 }
 
 #getAQuoteDiv {
