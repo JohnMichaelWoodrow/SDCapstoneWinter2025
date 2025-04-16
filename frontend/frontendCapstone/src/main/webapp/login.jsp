@@ -52,7 +52,7 @@
             <form id="loginform" method="POST" action="login">
                 <h2>Login</h2>
                 <label for="logemail">Email: </label>
-                <input class="logininput" type="text" id="logemail" name="email"><br>
+                <input class="logininput" type="email" id="logemail" name="email"><br>
                 <label for="logpassword">Password: </label>
                 <input class="logininput" type="password" id="logpassword" name="password"><br>
                 <button class="loginregbtn" type="submit">Login</button>
@@ -74,7 +74,7 @@
                 <input class="logininput" type="text" id="lname" name="lname"><br>
 
                 <label for="regemail">Email: </label>
-                <input class="logininput" type="text" id="regemail" name="regemail"><br>
+                <input class="logininput" type="email" id="regemail" name="regemail"><br>
 
                 <label for="regpassword">Password: </label>
                 <input class="logininput" type="password" id="regpassword" name="regpassword"><br>

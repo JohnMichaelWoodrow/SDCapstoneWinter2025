@@ -32,7 +32,7 @@ public class DeleteQuoteServlet extends HttpServlet {
             response.sendRedirect("agentDashboard.jsp");
         } else {
             Long userId = (Long) session.getAttribute("userId");
-            response.sendRedirect("cancelQuote?userId=" + userId);
+            response.sendRedirect("quoteDashboard?userId=" + userId);
         }
     }
 }

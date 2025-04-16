@@ -78,9 +78,9 @@
                 <input id="newName" type="text" name="newName"><br>
                 <p>Email: <%= userEmail %></p>
                 <label for="newEmail">Update Email: </label>
-                <input id="newEmail" type="text" name="newEmail"><br><br>
+                <input id="newEmail" type="email" name="newEmail"><br><br>
                 <label for="newPassword">Update Password: </label>
-                <input id="newPassword" type="text" name="newPassword"><br>
+                <input id="newPassword" type="password" name="newPassword"><br>
                 <input id="currentName" name="currentName" type="hidden" value="<%= userName %>" >
                 <input id="currentEmail" name="currentEmail" type="hidden" value="<%= userEmail %>" >
                 <input id="currentPassword" name="currentPassword" type="hidden" value="<%= userPassword %>" >
