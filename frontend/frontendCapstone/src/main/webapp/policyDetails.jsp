@@ -26,6 +26,7 @@
             <a class="navbarbtn" href="index.jsp">Home</a>
             <a class="navbarbtn" href="quote.jsp">Quote Dashboard</a>
             <a class="navbarbtn" href="about.jsp">About Us</a>
+            <a class="navbarbtn" href="contact.jsp">Contact Us</a>
         </div>
     </div>
 

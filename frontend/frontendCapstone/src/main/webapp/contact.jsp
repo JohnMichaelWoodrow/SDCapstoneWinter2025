@@ -1,5 +1,5 @@
 <%@ page import="java.util.Objects" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
@@ -27,10 +27,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>Contact Us</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="images/TaylorIns-inv.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div id="maindiv">
@@ -47,17 +51,30 @@
             <%= logoutbtn %>
         </div>
     </div>
-
-    <div id="pagemaindiv">
-        <h2>Welcome!</h2>
-        <p>We take pride in having the best coverage for you and your family.</p>
-        <div id="createAccountLink">
-            <h3>Get a Quote now!</h3>
-            <%= quotebtn %>
+    <div class="container" style="max-width: 700px; margin-top: 60px; margin-bottom: 60px;">
+        <div class="card shadow-sm border-5">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Contact Us</h2>
+                <form target="_blank" action="https://formsubmit.co/prideout2002@gmail.com" method="POST">
+                    <div class="form-group">
+                        <div class="form-row row">
+                            <div class="col">
+                                <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                            </div>
+                            <div class="col">
+                                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea placeholder="Your Message" class="form-control" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Send Message</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 </body>
 <footer>
     <div id="contactDiv">
@@ -66,4 +83,8 @@
         <p>Phone: +1 (709) 123-4567</p>
     </div>
 </footer>
+<script>
+    const userRole = "<%= userRole %>";
+    console.log("User role:", userRole);
+</script>
 </html>
