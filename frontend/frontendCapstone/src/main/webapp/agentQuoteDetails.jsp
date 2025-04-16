@@ -90,10 +90,6 @@
                 <th>Expiry Date:</th>
                 <td><%= expiryDate %></td>
             </tr>
-            <tr>
-                <th>Payment Date:</th>
-                <td>N/A</td>
-            </tr>
         </table>
 
         <div id="quoteActionDiv">

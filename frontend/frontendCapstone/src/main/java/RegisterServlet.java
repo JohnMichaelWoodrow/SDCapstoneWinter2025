@@ -31,6 +31,13 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
+        // Test password requirements
+        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+            request.setAttribute("registerError", "Password must have at least 8 characters, 1 digit, 1 uppercase, 1 lowercase and 1 special character.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
         // Checks if passwords match
         if (!password.equals(confirmPassword)) {
             request.setAttribute("registerError", "Passwords do not match.");

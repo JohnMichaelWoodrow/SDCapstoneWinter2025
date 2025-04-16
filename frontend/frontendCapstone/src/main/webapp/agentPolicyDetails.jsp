@@ -65,7 +65,7 @@
                     detailsTable += "<tr><th>Policy Type:</th><td>Auto</td></tr>";
                     detailsTable += "<tr><th>Vehicle:</th><td>" + make + " " + model + " (" + year + ")</td></tr>";
                     detailsTable += "<tr><th>VIN:</th><td>" + vin + "</td></tr>";
-                    detailsTable += "<tr><th>Base Premium:</th><td>" + basePrice + "</td></tr>";
+                    detailsTable += "<tr><th>Base Premium:</th><td style=\"color:green;\">$" + basePrice + "</td></tr>";
                 } else if (quoteType.equalsIgnoreCase("Home")) {
                     JSONObject home = quote.getJSONObject("home");
 
@@ -85,7 +85,7 @@
                     detailsTable += "<tr><th>Heating Type:</th><td>" + heating + "</td></tr>";
                     detailsTable += "<tr><th>Location:</th><td>" + location + "</td></tr>";
                     detailsTable += "<tr><th>Liability Limit:</th><td>$" + liabilityLimit + "</td></tr>";
-                    detailsTable += "<tr><th>Base Premium:</th><td>$" + basePrice + "</td></tr>";
+                    detailsTable += "<tr><th>Base Premium:</th><td style=\"color:green;\">$" + basePrice + "</td></tr>";
                 }
         %>
 
