@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "GETcustomer",
+			"name": "Get All Customers",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -27,7 +27,7 @@
 			"response": []
 		},
 		{
-			"name": "GETcustomerbyid",
+			"name": "Get Customer By ID",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -47,7 +47,7 @@
 			"response": []
 		},
 		{
-			"name": "GEThome",
+			"name": "Get All Homes",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -66,7 +66,7 @@
 			"response": []
 		},
 		{
-			"name": "GETuser",
+			"name": "Get All Users",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -85,7 +85,7 @@
 			"response": []
 		},
 		{
-			"name": "GETvehicle",
+			"name": "Get All Vehicles",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -104,7 +104,7 @@
 			"response": []
 		},
 		{
-			"name": "GETadmin",
+			"name": "Get All Admins",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -123,7 +123,7 @@
 			"response": []
 		},
 		{
-			"name": "GETagent",
+			"name": "Get All Agents",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -142,7 +142,7 @@
 			"response": []
 		},
 		{
-			"name": "GETquote",
+			"name": "Get All Quotes",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -161,7 +161,7 @@
 			"response": []
 		},
 		{
-			"name": "GEThome_quote",
+			"name": "Get All Home Quotes",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -180,7 +180,7 @@
 			"response": []
 		},
 		{
-			"name": "GETauto_quote",
+			"name": "Get All Auto Quotes",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -199,7 +199,7 @@
 			"response": []
 		},
 		{
-			"name": "GETpolicy",
+			"name": "Get All Policies",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -218,7 +218,7 @@
 			"response": []
 		},
 		{
-			"name": "POSTCustomer",
+			"name": "Create New Customer",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -246,7 +246,7 @@
 			"response": []
 		},
 		{
-			"name": "POSThome",
+			"name": "Create New Home",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -274,7 +274,7 @@
 			"response": []
 		},
 		{
-			"name": "POSTvehicle",
+			"name": "Create New Vehicle",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -302,7 +302,7 @@
 			"response": []
 		},
 		{
-			"name": "POSTadmin",
+			"name": "Create New Admin",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -330,7 +330,7 @@
 			"response": []
 		},
 		{
-			"name": "POSTagent",
+			"name": "Create New Agent",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -358,7 +358,7 @@
 			"response": []
 		},
 		{
-			"name": "POSThome_quote",
+			"name": "Create New Home Quote",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -386,7 +386,7 @@
 			"response": []
 		},
 		{
-			"name": "POSTauto_quote",
+			"name": "Create New Auto Quote",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -414,7 +414,7 @@
 			"response": []
 		},
 		{
-			"name": "POSTpolicy",
+			"name": "Create New Policy",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -442,7 +442,7 @@
 			"response": []
 		},
 		{
-			"name": "PUThome",
+			"name": "Update Home By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -471,7 +471,7 @@
 			"response": []
 		},
 		{
-			"name": "PUTuser",
+			"name": "Update User By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -500,7 +500,7 @@
 			"response": []
 		},
 		{
-			"name": "PUTvehicle",
+			"name": "Update Vehicle By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -529,7 +529,7 @@
 			"response": []
 		},
 		{
-			"name": "PUTadmin",
+			"name": "Update Admin By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -558,7 +558,7 @@
 			"response": []
 		},
 		{
-			"name": "PUTcustomer",
+			"name": "Update Customer By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -587,7 +587,7 @@
 			"response": []
 		},
 		{
-			"name": "PUTagent",
+			"name": "Update Agent By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -616,7 +616,7 @@
 			"response": []
 		},
 		{
-			"name": "PUTquote",
+			"name": "Update Quote By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -645,7 +645,7 @@
 			"response": []
 		},
 		{
-			"name": "PUThome_quote",
+			"name": "Update Home Quote By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -674,7 +674,7 @@
 			"response": []
 		},
 		{
-			"name": "PUTauto_quote",
+			"name": "Update Auto Quote By ID",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -757,7 +757,7 @@
 			"response": []
 		},
 		{
-			"name": "DELETEhome",
+			"name": "Delete Home By ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -777,7 +777,7 @@
 			"response": []
 		},
 		{
-			"name": "DELETEvehicle",
+			"name": "Delete Vehicle By ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -797,7 +797,7 @@
 			"response": []
 		},
 		{
-			"name": "DELETEadmin",
+			"name": "Delete Admin By ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -817,7 +817,7 @@
 			"response": []
 		},
 		{
-			"name": "DELETEcustomer",
+			"name": "Delete Customer By ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -837,7 +837,7 @@
 			"response": []
 		},
 		{
-			"name": "DELETEagent",
+			"name": "Delete Agent By ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -857,7 +857,7 @@
 			"response": []
 		},
 		{
-			"name": "DELETEquote",
+			"name": "Delete Quote By ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -877,7 +877,7 @@
 			"response": []
 		},
 		{
-			"name": "DELETEpolicy",
+			"name": "Delete Policy By ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
