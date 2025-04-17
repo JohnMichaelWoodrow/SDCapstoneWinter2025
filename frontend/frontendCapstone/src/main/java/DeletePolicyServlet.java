@@ -41,7 +41,7 @@ public class DeletePolicyServlet extends HttpServlet {
             response.sendRedirect("agentDashboard.jsp");
         } else {
             Long userId = (Long) request.getSession().getAttribute("userId");
-            response.sendRedirect("cancelQuote?userId=" + userId);
+            response.sendRedirect("quoteDashboard?userId=" + userId);
         }
     }
 }
